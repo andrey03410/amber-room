@@ -2,21 +2,14 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        ХУЙ
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <nav className="Navigation">
+            <ul className="top-nav">
+                <li className="nav-list"><a className="nav-ref" href="#"><i/>Карта</a></li>
+                <li className="nav-list"><a className="nav-ref" href="#">Поиск</a></li>
+                <li className="nav-list"><a className="nav-ref" href="#">Добавить</a></li>
+            </ul>
+        </nav>
     </div>
   );
 }
