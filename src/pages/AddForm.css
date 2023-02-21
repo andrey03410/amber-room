@@ -1,0 +1,17 @@
+.form_wrapper {
+    display: block;
+    width: 600px;
+    border: 4px double black; /* Параметры границы */
+    background: #fc3; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+    margin: 0;
+}
+
+.form_input{
+    width: 100%;
+}
+
+.forms_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
