@@ -54,6 +54,62 @@ const AddForm = () => {
                     </form>
                 </div>
             </details>
+
+            <details>
+                <summary>Места</summary>
+                <div className={"forms_wrapper"}>
+                    <form className="form_wrapper">
+                        Добавить место
+                        <div>
+                            <p>* Название</p>
+                            <input className="form_input"/>
+                        </div>
+                        <div>
+                            <p>Описание</p>
+                            <input className="form_input"/>
+                        </div>
+                        <button type={"submit"}>Отправить</button>
+                    </form>
+                    <div className="form_wrapper">
+                        Список мест
+                        <table>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>id места</td>
+                                <td>Название</td>
+                                <td>Описание</td>
+                            </tr>
+                            <tr>
+                                <td>Eating Habits</td>
+                                <td>Eats everyone's leftovers</td>
+                                <td>Nibbles at food</td>
+                                <td>Hearty eater</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Версия</summary>
+            </details>
+
+            <details>
+                <summary>Попытка поиска</summary>
+            </details>
+{/*КАТЯ! тут для тебя ↓↓↓↓↓↓↓↓↓↓↓*/}
+{/*Поняла? Обведи ответ: нет, да*/}
+            <details>
+                <summary>Документ</summary>
+            </details>
+
+            <details>
+                <summary>Показание</summary>
+            </details>
+
+            <details>
+                <summary>Исследование</summary>
+            </details>
         </div>
     );
 };
