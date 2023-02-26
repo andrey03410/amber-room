@@ -304,17 +304,20 @@ const AddForm = () => {
                                     <form className="form_wrapper">
                                         Добавить показание
                                         <div>
-                                            <p>* Тип документа</p>
+                                        <p>Автор показания</p>
                                             <select name="select" size="3" multiple className="form_input">
-                                                <option selected value="s1">Справка</option>
-                                                <option value="s2">Акт</option>
-                                                <option value="s3">Письмо</option>
-                                                <option value="s4">Выписка</option>
-                                                <option value="s5">Характеристика</option>
+                                                <option  selected value="s1" > Иванов</option>
+                                                <option value="s2">Петров</option>
+                                                <option value="s3">Сидоров</option>
+                                                <option value="s4">Пирогов</option>
                                             </select>
                                         </div>
                                         <div>
-                                        <p>Попытка поиска</p>
+                                            <p>Показание </p>
+                                            <textarea className="form_input"/>
+                                        </div>
+                                        <div>
+                                        <p>Версия</p>
                                             <select name="select" size="3" multiple className="form_input">
                                                 <option selected value="s1">1 (Описание)</option>
                                                 <option value="s2">2 (Описание)</option>
@@ -327,33 +330,20 @@ const AddForm = () => {
                                             <p>Дата </p>
                                             <input className="form_input"/>
                                         </div>
-                                        <div>
-                                            <p>Описание </p>
-                                            <textarea className="form_input"/>
-                                        </div>
-                                        <div>
-                                        <p>Добавить автора(ов)</p>
-                                            <select name="select" size="3" multiple className="form_input">
-                                                <option  selected value="s1" > Иванов</option>
-                                                <option value="s2">Петров</option>
-                                                <option value="s3">Сидоров</option>
-                                                <option value="s4">Пирогов</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <p>Добавить персон, которые упоминались в документе</p>
-                                                <select name="select" size="3" multiple className="form_input">
-                                                    <option  selected value="s1" >Иванов</option>
-                                                    <option value="s2">Петров</option>
-                                                    <option value="s3">Сидоров</option>
-                                                    <option value="s4">Пирогов</option>
-                                                </select>
-                                            </div>
+                                        <p>Документы, с которыми связаны показания</p>
+                                        <select name="select" size="3" multiple className="form_input">
+                                            <option selected value="s1">1</option>
+                                            <option value="s2">2</option>
+                                            <option value="s3">3</option>
+                                            <option value="s4">4</option>
+                                        </select>
+
+
                                         <button type={"submit"}>Отправить</button>
                                     </form>
                                     <div className="form_wrapper">
-                                        Список документов
-                                        <p>Документ</p>
+                                        Список показаний
+                                        <p>Показание</p>
                                         <select name="select" size="3" multiple className="form_input">
                                             <option selected value="s1">1</option>
                                             <option value="s2">2</option>
@@ -363,10 +353,10 @@ const AddForm = () => {
                                         <table>
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td>id документа</td>
-                                                <td>id тип документа</td>
+                                                <td>id показания</td>
+                                                <td>id автора</td>
+                                                <td>Показание</td>
                                                 <td>Дата</td>
-                                                <td>Описание</td>
                                             </tr>
                                             <tr>
                                                 <td>Eating Habits</td>
