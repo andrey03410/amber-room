@@ -4,7 +4,9 @@
     border: 4px double black; /* Параметры границы */
     background: #fc3; /* Цвет фона */
     padding: 10px; /* Поля вокруг текста */
-    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .form_input{
