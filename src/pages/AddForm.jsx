@@ -1,7 +1,15 @@
 import React from 'react';
 import './AddForm.css'
+import {PlaceAPI} from '../API/Place'
 
 const AddForm = () => {
+
+    PlaceAPI.getPlaces().then(response => response.json()) // Декодируем ответ в формате json
+        .then(data => {
+// парсим данные
+            const parsedData = JSON.parse(data);
+            console.log(data);
+        })
     return (
         <div>
             <details className={"detail_wrapper"}>
