@@ -2,7 +2,7 @@ import './App.css';
 import {Routes, Route, Link} from "react-router-dom";
 import Search from './pages/Search'
 import Map from './pages/Map'
-import AddForm from './pages/AddForm'
+import AddForm from './pages/form/AddForm'
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
             <Route path="/AddForm" element={<AddForm/>}/>
             <Route path="/Search" element={<Search/>}/>
             <Route path="/Map" element={<Map/>}/>
+            <Route path="/" element={<div>About</div>}/>
         </Routes>
     </div>
 

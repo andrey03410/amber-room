@@ -1,12 +1,13 @@
 .form_wrapper {
     display: block;
     width: 600px;
-    border: 4px double black; /* Параметры границы */
-    background: #fc3; /* Цвет фона */
+    /* Параметры границы */
+    background: #d3d3d3; /* Цвет фона */
+    border-radius: 10px;
+    border: 2px solid #d0c6c6;
     padding: 10px; /* Поля вокруг текста */
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .form_input{
@@ -38,4 +39,22 @@ details[open] summary {
     font-weight: bold;
     margin: -1em -1em 0;
     padding: 0.5em;
+}
+
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #000000;
+    border-collapse: collapse;
+}
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #000000;
+    border: 1px solid #2183c9;
+}
+.table td {
+    border: 1px solid #000000;
+    padding: 5px;
 }
