@@ -42,19 +42,40 @@ details[open] summary {
 }
 
 
-.table {
+.scroll-table-body {
+    height: 300px;
+    overflow-x: auto;
+}
+.scroll-table table {
     width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid #000000;
-    border-collapse: collapse;
+    table-layout: fixed;
+    border: none;
 }
-.table th {
+.scroll-table thead th {
     font-weight: bold;
-    padding: 5px;
-    background: #000000;
-    border: 1px solid #2183c9;
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    background: #d8d8d8;
+    font-size: 14px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
-.table td {
+.scroll-table tbody td {
+    text-align: left;
+    padding: 10px 15px;
+    font-size: 14px;
+    vertical-align: top;
     border: 1px solid #000000;
-    padding: 5px;
+}
+
+/* Стили для скролла таблицы*/
+.scroll-table-body::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-table-body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+.scroll-table-body::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }

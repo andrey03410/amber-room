@@ -25,20 +25,44 @@ const Places = () => {
             </form>
             <div className="form_wrapper">
                 Список мест
-                <table className={"table"}>
-                    <tr>
-                        <td>id места</td>
-                        <td>Название</td>
-                        <td>Описание</td>
-                    </tr>
-                    {places.map(item => (
-                        <tr>
-                            <td>{item.id}</td>
-                            <td>{item.name}</td>
-                            <td>{item.description}</td>
-                        </tr>
-                    ))}
-                </table>
+                <div className="scroll-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id места</th>
+                                <th>Название</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div className="scroll-table-body">
+                        <table>
+                            <tbody>
+                            {places.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            ))}
+                            {places.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            ))}
+                            {places.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );
