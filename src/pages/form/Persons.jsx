@@ -1,6 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 const Persons = () => {
+    const [persons, setPersons] = useState([])
+
+    const [name, setName] = useState("test name")
+    const [id_nationality, setNationality] = useState("test nationality")
+    const [description, setDescription] = useState("test desc")
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/b51256bf-3f40-4ca8-96c2-eabb9b408b0a")
+            .then(res => res.json())
+            .then((result) => {
+                setPersons(result.persons)
+            })
+    }, [])
+
     return (
         <div className="forms_wrapper">
             <form className="form_wrapper">
@@ -32,20 +46,49 @@ const Persons = () => {
                     <input className="form_input"/>
                 </div>
                 <p>Результаты поиска </p>
+                <div className="scroll-table">
                 <table>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>id персоны</td>
-                        <td>ФИО</td>
-                        <td>Описание</td>
-                    </tr>
-                    <tr>
-                        <td>Eating Habits</td>
-                        <td>Eats everyone's leftovers</td>
-                        <td>Nibbles at food</td>
-                        <td>Hearty eater</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td>id персоны</td>
+                            <td>ФИО</td>
+                            <td>Гражданство</td>
+                            <td>Описание</td>
+                        </tr>
+                    </thead>
                 </table>
+                <div className="scroll-table-body">
+                    <table>
+                        <tbody>
+                        {persons.map(item => (
+                            <tr>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.id_nationality}</td>
+                                <td>{item.description}</td>
+                            </tr>
+                        ))}
+                        {persons.map(item => (
+                            <tr>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.id_nationality}</td>
+                                <td>{item.description}</td>
+                            </tr>
+                        ))}
+                        {persons.map(item => (
+                            <tr>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.id_nationality}</td>
+                                <td>{item.description}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
             </form>
         </div>
