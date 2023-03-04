@@ -70,12 +70,7 @@ const Researches = () => {
                                 </div>
                 Список исследований
                 <p>Исследование</p>
-                <select name="select" size="3" multiple className="form_input">
-                    <option selected value="s1">1</option>
-                    <option value="s2">2</option>
-                    <option value="s3">3</option>
-                    <option value="s4">4</option>
-                </select>
+
                 <table>
                     <tr>
                         <td>&nbsp;</td>
