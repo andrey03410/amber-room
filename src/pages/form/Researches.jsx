@@ -63,6 +63,11 @@ const Researches = () => {
                 <button type={"submit"}>Отправить</button>
             </form>
             <div className="form_wrapper">
+                                Найти документ
+                                <div>
+                                    <p>* Тип исследования</p>
+                                    <input className="form_input"/>
+                                </div>
                 Список исследований
                 <p>Исследование</p>
                 <select name="select" size="3" multiple className="form_input">

@@ -21,6 +21,11 @@ const SearchAttempts = () => {
                     <button type={"submit"}>Отправить</button>
                 </form>
                 <div className="form_wrapper">
+                                    Найти попытку поиска
+                                    <div>
+                                        <p>* Дата начала</p>
+                                        <input className="form_input"/>
+                                    </div>
                     Список попыток поиска
                     <p>* Версия</p>
                     <select name="select" size="3" multiple className="form_input">

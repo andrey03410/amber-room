@@ -68,6 +68,11 @@ const Documents = () => {
                 <button type={"submit"}>Отправить</button>
             </form>
             <div className="form_wrapper">
+                    Найти документ
+                    <div>
+                        <p>* ФИО персоны, которая упоминается в документе</p>
+                        <input className="form_input"/>
+                    </div>
                 Список документов
                 <p>Документ</p>
                 <select name="select" size="3" multiple className="form_input">
@@ -77,6 +82,7 @@ const Documents = () => {
                     <option value="s4">4</option>
                 </select>
                 <table>
+
                     <tr>
                         <td>&nbsp;</td>
                         <td>id документа</td>

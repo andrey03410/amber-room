@@ -44,6 +44,11 @@ const Indications = () => {
                 <button type={"submit"}>Отправить</button>
             </form>
             <div className="form_wrapper">
+                        Найти показание
+                        <div>
+                            <p>* ФИО автора</p>
+                            <input className="form_input"/>
+                        </div>
                 Список показаний
                 <p>Показание</p>
                 <select name="select" size="3" multiple className="form_input">

@@ -45,6 +45,11 @@ const Places = () => {
                 <button type={"submit"}>Отправить</button>
             </form>
             <div className="form_wrapper">
+                        Найти место
+                        <div>
+                            <p>* Название места</p>
+                            <input className="form_input"/>
+                        </div>
                 Список мест
                 <div className="scroll-table">
                     <table>
