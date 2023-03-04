@@ -15,6 +15,11 @@ const Technique = () => {
                     <button type={"submit"}>Отправить</button>
                 </form>
                 <div className="form_wrapper">
+                                    Найти технику
+                                    <div>
+                                        <p>* Тип техники</p>
+                                        <input className="form_input"/>
+                                    </div>
                     Список находок
                     <p>Попытка поиска</p>
                     <select name="select" size="3" multiple className="form_input">

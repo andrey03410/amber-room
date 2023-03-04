@@ -46,7 +46,7 @@ const Persons = () => {
                         <td>Hearty eater</td>
                     </tr>
                 </table>
-                <button>Отправить</button>
+
             </form>
         </div>
     );

@@ -22,6 +22,11 @@ const Finds = () => {
                     <button type={"submit"}>Отправить</button>
                 </form>
                 <div className="form_wrapper">
+                        Найти находку
+                        <div>
+                            <p>* Введите номер попытки поиска</p>
+                            <input className="form_input"/>
+                        </div>
                     Список находок
                     <p>Попытка поиска</p>
                     <select name="select" size="3" multiple className="form_input">
@@ -31,6 +36,7 @@ const Finds = () => {
                         <option value="s4">4</option>
                     </select>
                     <table>
+
                         <tr>
                             <td>&nbsp;</td>
                             <td>id находки</td>

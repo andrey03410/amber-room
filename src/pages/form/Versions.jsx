@@ -16,6 +16,11 @@ const Versions = () => {
                 <button type={"submit"}>Отправить</button>
             </form>
             <div className="form_wrapper">
+                                Найти версию
+                                <div>
+                                    <p>* Место</p>
+                                    <input className="form_input"/>
+                                </div>
                 Список версий
                 <table>
                     <tr>
