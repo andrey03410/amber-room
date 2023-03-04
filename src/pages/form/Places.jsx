@@ -3,8 +3,8 @@ import React, {useEffect, useState} from 'react';
 const Places = () => {
     const [places, setPlaces] = useState([])
 
-    const [idPlace, setIdPlace] = useState(0)
-    const [description, setDescription] = useState("test")
+    const [name, setName] = useState("test name")
+    const [description, setDescription] = useState("test desc")
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/6de17b9c-0751-418c-b695-b30fc486b6fb")
@@ -19,7 +19,7 @@ const Places = () => {
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({idPlace, description})
+            body: JSON.stringify({name, description})
         }
         fetch("test.com", request)
             .then(response => {
@@ -36,11 +36,11 @@ const Places = () => {
                 Добавить место
                 <div>
                     <p>* Название</p>
-                    <input className="form_input"/>
+                    <input className="form_input" onChange={(event) => {setName(event.target.value)}}/>
                 </div>
                 <div>
                     <p>Описание</p>
-                    <input className="form_input"/>
+                    <input className="form_input" onChange={(event) => {setDescription(event.target.value)}}/>
                 </div>
                 <button type={"submit"}>Отправить</button>
             </form>
