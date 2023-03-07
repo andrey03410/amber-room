@@ -80,6 +80,7 @@ const Finds = () => {
                                 </tr>
                             ))}
 
+
                             </tbody>
                         </table>
                     </div>
