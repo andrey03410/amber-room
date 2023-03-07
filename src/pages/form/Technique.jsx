@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 const Technique = () => {
+    const [technique, setTechnique] = useState([])
+
+    const [idTechnique, setIdTechnique] = useState("test name")
+
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/a45e6e8c-8147-495d-84f3-4cd92d163a92")
+            .then(res => res.json())
+            .then((result) => {
+                setTechnique(result.technique)
+            })
+    }, [])
     return (
-        <div>
 
             <div className={"forms_wrapper"}>
                 <form className="form_wrapper">
@@ -20,26 +31,45 @@ const Technique = () => {
                                         <p>* Тип техники</p>
                                         <input className="form_input"/>
                                     </div>
-                    Список находок
-                    <p>Попытка поиска</p>
-
+                <div className="scroll-table">
                     <table>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>id техники</td>
-                            <td>Название</td>
+                        <thead>
+                            <tr>
+                                <th>id техники</th>
+                                <th>Тип техники</th>
 
-                        </tr>
-                        <tr>
-                            <td>Eating Habits</td>
-                            <td>Eats everyone's leftovers</td>
-                            <td>Nibbles at food</td>
-                            <td>Hearty eater</td>
-                        </tr>
+                            </tr>
+                        </thead>
                     </table>
+                    <div className="scroll-table-body">
+                        <table>
+                            <tbody>
+                            {technique.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_technique}</td>
+                                </tr>
+                            ))}
+                            {technique.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_technique}</td>
+                                </tr>
+                            ))}
+                            {technique.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_technique}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </div>
         </div>
+
     );
 };
 
