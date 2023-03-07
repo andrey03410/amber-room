@@ -10,16 +10,22 @@
     margin-right: auto;
 }
 
-.form_input{
+.form_input {
     width: 100%;
+    height: 30px;
+    background: #F7F8FA;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 0 6px;
 }
 
-.forms_wrapper{
+.forms_wrapper {
     display: flex;
     justify-content: space-between;
 }
 
-.detail_wrapper{
+.detail_wrapper {
     border: 1px solid #aaa;
     border-radius: 4px;
     padding: 1em 1em 0;
@@ -35,7 +41,7 @@ details[open] summary {
     margin-bottom: 0.5em;
 }
 
-.summary_wrapper{
+.summary_wrapper {
     font-weight: bold;
     margin: -1em -1em 0;
     padding: 0.5em;
@@ -46,11 +52,13 @@ details[open] summary {
     height: 300px;
     overflow-x: auto;
 }
+
 .scroll-table table {
     width: 100%;
     table-layout: fixed;
     border: none;
 }
+
 .scroll-table thead th {
     font-weight: bold;
     text-align: left;
@@ -61,6 +69,7 @@ details[open] summary {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
 }
+
 .scroll-table tbody td {
     text-align: left;
     padding: 10px 15px;
@@ -73,9 +82,11 @@ details[open] summary {
 .scroll-table-body::-webkit-scrollbar {
     width: 6px;
 }
+
 .scroll-table-body::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
+
 .scroll-table-body::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
