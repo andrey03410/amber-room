@@ -1,6 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 const Documents = () => {
+    const [document, setDocument] = useState([])
+
+    const [idTypeDoc, setIdTypeDoc] = useState("test name")
+    const [idSearchAtt, setIdSearchAtt] = useState("test search")
+    const [date, setDate] = useState("test search")
+    const [description, setDescription] = useState("test desc")
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/06582d7b-c765-4529-bd86-37107d13a986")
+            .then(res => res.json())
+            .then((result) => {
+                setDocument(result.document)
+            })
+    }, [])
     return (
         <div className={"forms_wrapper"}>
             <form className="form_wrapper">
@@ -74,24 +88,53 @@ const Documents = () => {
                         <input className="form_input"/>
                     </div>
                 Список документов
-                <p>Документ</p>
-                <table>
+                <div className="scroll-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id места</th>
+                                <th>id тип документа</th>
+                                <th>id попытки поиска</th>
+                                <th>Дата</th>
+                                <th>Описание</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div className="scroll-table-body">
+                        <table>
+                            <tbody>
+                            {document.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_type_doc}</td>
+                                    <td>{item.id_search_attempts}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            ))}
 
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>id документа</td>
-                        <td>id тип документа</td>
-                        <td>Дата</td>
-                        <td>Описание</td>
-                    </tr>
-                    <tr>
-                        <td>Eating Habits</td>
-                        <td>Eats everyone's leftovers</td>
-                        <td>Nibbles at food</td>
-                        <td>Hearty eater</td>
-                        <td>Hearty eater</td>
-                    </tr>
-                </table>
+                            {document.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_type_doc}</td>
+                                    <td>{item.id_search_attempts}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            ))}
+                            {document.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_type_doc}</td>
+                                    <td>{item.id_search_attempts}</td>
+                                    <td>{item.date}</td>
+                                    <td>{item.description}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );

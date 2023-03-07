@@ -10,7 +10,7 @@
 .Navigation {
   list-style: none;
   margin: 0;
-  background: #ECDAD6;
+  background: #d3d3d3;
   display: flex;
   justify-content: right;
   padding-right: 100px;
