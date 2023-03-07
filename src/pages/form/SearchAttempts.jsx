@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 
 const SearchAttempts = () => {
-const [searchAttempts, setSearchAt] = useState([])
+const [search_attempts, setSearchAt] = useState([])
 
     const [idVersion, setIdVersion] = useState("test name")
     const [dateStart, setDateStart] = useState("date1")
     const [dateFinish, setDateFinish] = useState("date2")
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/63200f37-abe8-487f-810f-692cc7d5197e")
+        fetch("https://run.mocky.io/v3/1a2e2b8c-1311-4251-b99e-68e8df57062c")
             .then(res => res.json())
             .then((result) => {
-                setSearchAt(result.searchAttempts)
+                setSearchAt(result.search_attempts)
             })
     }, [])
     return (
@@ -32,6 +32,7 @@ const [searchAttempts, setSearchAt] = useState([])
                     </div>
                     <button type={"submit"}>Отправить</button>
                 </form>
+
                 <div className="form_wrapper">
                     Найти попытку поиска
                     <div>
@@ -54,15 +55,8 @@ const [searchAttempts, setSearchAt] = useState([])
                         <div className="scroll-table-body">
                             <table>
                                 <tbody>
-                                {searchAttempts.map(item => (
-                                    <tr>
-                                        <th>id попытки поиска</th>
-                                        <th>id версии</th>
-                                        <th>Дата начала</th>
-                                        <th>Дата конца</th>
-                                    </tr>
-                                ))}
-                                {searchAttempts.map(item => (
+
+                                {search_attempts.map(item => (
                                 <tr>
                                     <td>{item.id}</td>
                                     <td>{item.id_versions}</td>
@@ -70,7 +64,15 @@ const [searchAttempts, setSearchAt] = useState([])
                                     <td>{item.date_finish}</td>
                                 </tr>
                                 ))}
-                                {searchAttempts.map(item => (
+                                {search_attempts.map(item => (
+                                <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_versions}</td>
+                                    <td>{item.date_start}</td>
+                                    <td>{item.date_finish}</td>
+                                </tr>
+                                ))}
+                                {search_attempts.map(item => (
                                 <tr>
                                     <td>{item.id}</td>
                                     <td>{item.id_versions}</td>
@@ -79,11 +81,11 @@ const [searchAttempts, setSearchAt] = useState([])
                                 </tr>
                                 ))}
                                 </tbody>
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
-             </div>
-        </div>
+            </div>
 
 
 
