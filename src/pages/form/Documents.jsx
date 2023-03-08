@@ -8,6 +8,15 @@ const Documents = () => {
     const [date, setDate] = useState("test search")
     const [description, setDescription] = useState("test desc")
 
+    const [imageDesc, setImageDesc] = useState(["test"])
+
+    const addButtonImage = (event) => {
+        event.preventDefault()
+        setImageDesc(prevState => {
+            return [...prevState, "123"]
+        })
+    }
+
     useEffect(() => {
         fetch("https://run.mocky.io/v3/06582d7b-c765-4529-bd86-37107d13a986")
             .then(res => res.json())
@@ -70,14 +79,25 @@ const Documents = () => {
                     <div className="forms_wrapper">
                         <div>
                             <p>Фото </p>
-                            <button type="button">Добавить</button>
                         </div>
                         <div>
                             <p>Описание </p>
-                            <input className="form_input"/>
                         </div>
-
                     </div>
+
+                    {imageDesc.map(item => (
+                        <div className="forms_wrapper">
+                            <div>
+                                <input type={"file"}/>
+                            </div>
+                            <div>
+                                <input className="form_input"/>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div>
+                    <button onClick={addButtonImage}>Добавить ячейку</button>
                 </div>
                 <button type={"submit"}>Отправить</button>
             </form>
