@@ -17,6 +17,17 @@ const Documents = () => {
         })
     }
 
+    const delButtonImage = (event) => {
+        event.preventDefault()
+        setImageDesc(prevState => {
+            let array = [...prevState]
+            if(array.length > 1){
+                array.pop()
+            }
+            return array
+        })
+    }
+
     useEffect(() => {
         fetch("https://run.mocky.io/v3/06582d7b-c765-4529-bd86-37107d13a986")
             .then(res => res.json())
@@ -85,19 +96,27 @@ const Documents = () => {
                         </div>
                     </div>
 
-                    {imageDesc.map(item => (
+                    {imageDesc.map((item, index) => (
                         <div className="forms_wrapper">
                             <div>
+                                {index}
                                 <input type={"file"}/>
                             </div>
                             <div>
-                                <input className="form_input"/>
+                                <input className="form_input" onChange={(event => {
+                                    setImageDesc(prevState => {
+                                        let array = [...prevState]
+                                        array[index] = event.target.value
+                                        return array
+                                    })
+                                })}/>
                             </div>
                         </div>
                     ))}
                 </div>
                 <div>
                     <button onClick={addButtonImage}>Добавить ячейку</button>
+                    <button onClick={delButtonImage}>Удалить ячейку</button>
                 </div>
                 <button type={"submit"}>Отправить</button>
             </form>
