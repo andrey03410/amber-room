@@ -9,7 +9,7 @@ import Documents from "./Documents";
 import Indications from "./Indications";
 import Researches from "./Researches";
 import Finds from "./Finds";
-import Technique from "./Technique";
+
 
 const AddForm = () => {
     return (
@@ -55,10 +55,7 @@ const AddForm = () => {
                 <summary className={"summary_wrapper"}>Исследование</summary>
                 <Researches/>
             </details>
-            <details className={"detail_wrapper"}>
-                <summary className={"summary_wrapper"}>Техника</summary>
-                <Technique/>
-            </details>
+
         </div>
     );
 };

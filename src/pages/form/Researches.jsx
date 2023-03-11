@@ -56,24 +56,10 @@ const Researches = () => {
                     <textarea className="form_input"/>
                 </div>
                 <div>
-                    <p>Техника </p>
-                    <div className="forms_wrapper">
-                        <div>
-                            <p>Тип техники </p>
-                            <select name="select" size="3" multiple className="form_input">
-                                <option  selected value="s1" > 1 (Описание)</option>
-                                <option value="s2">2 (Описание)</option>
-                                <option value="s3">3 (Описание)</option>
-                                <option value="s4">4 (Описание)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <p>Количество техники </p>
-                            <input className="form_input"/>
-                        </div>
-
-                    </div>
+                    <p>Техника</p>
+                    <textarea className="form_input"/>
                 </div>
+
 
                 <button type={"submit"}>Отправить</button>
             </form>

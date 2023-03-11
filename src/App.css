@@ -13,21 +13,27 @@
   background: #d3d3d3;
   display: flex;
   justify-content: right;
-  padding-right: 100px;
+  padding-right: 70px;
 }
 
 .nav-list{
   display: inline-block;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-right: 1px solid #b19891;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: bold;
+
 }
 
 .nav-ref{
-  font-size: 26px;
+  font-size: 18px;
   text-decoration: none;
-  font-family: Arial, serif;
   color: black;
+}
+
+.nav-ref:hover{
+  font-size: 18px;
+  text-decoration: none;
+  color: #F7F8FA;
 }
 
 
