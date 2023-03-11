@@ -17,7 +17,7 @@
     border: 1px solid #D3D9DE;
     box-sizing: border-box;
     border-radius: 6px;
-    padding: 0 6px;
+    padding: 6px;
 }
 
 .forms_wrapper {
@@ -155,4 +155,5 @@ details[open] summary {
     border: 1px solid #D3D9DE;
     box-sizing: border-box;
     border-radius: 6px;
+    margin-top: 6px;
 }

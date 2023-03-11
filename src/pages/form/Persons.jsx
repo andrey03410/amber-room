@@ -68,10 +68,10 @@ const Persons = () => {
                 <table>
                     <thead>
                         <tr>
-                            <td>id персоны</td>
-                            <td>ФИО</td>
-                            <td>Гражданство</td>
-                            <td>Описание</td>
+                            <th>id персоны</th>
+                            <th>ФИО</th>
+                            <th>Гражданство</th>
+                            <th>Описание</th>
                         </tr>
                     </thead>
                 </table>
