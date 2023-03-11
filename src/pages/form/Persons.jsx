@@ -58,12 +58,12 @@ const Persons = () => {
             </form>
 
             <form className="form_wrapper">
-                Найти персону
+                <span className={"title_form"}>Найти персону</span>
                 <div>
-                    <p>* ФИО</p>
+                    <p className={"title_field"}>* ФИО</p>
                     <input className="form_input"/>
                 </div>
-                <p>Результаты поиска </p>
+                <p className={"title_field"}>Результаты поиска </p>
                 <div className="scroll-table">
                 <table>
                     <thead>

@@ -33,24 +33,24 @@ const Places = () => {
     return (
         <div className={"forms_wrapper"}>
             <form className="form_wrapper" onSubmit={submit}>
-                Добавить место
+                <span className={"title_form"}>Добавить место</span>
                 <div>
-                    <p>* Название</p>
+                    <p className={"title_field"}>* Название</p>
                     <input className="form_input" onChange={(event) => {setName(event.target.value)}}/>
                 </div>
                 <div>
-                    <p>Описание</p>
-                    <input className="form_input" onChange={(event) => {setDescription(event.target.value)}}/>
+                    <p className={"title_field"}>Описание</p>
+                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
                 </div>
-                <button type={"submit"}>Отправить</button>
+                <button className={"submit_button"}>Отправить</button>
             </form>
             <div className="form_wrapper">
-                        Найти место
+            <span className={"title_form"}>Найти место</span>
                         <div>
-                            <p>* Название места</p>
+                            <p className={"title_field"}>* Название места</p>
                             <input className="form_input"/>
                         </div>
-                Список мест
+                <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>
