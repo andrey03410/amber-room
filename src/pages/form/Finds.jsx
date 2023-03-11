@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 
 const Finds = () => {
     const [find, setFind] = useState([])
+    const [idSearchAttList, setIdSearchAttList] = useState(["1. Королевский замок 1949-1956", "2. Королевский замок 1964-1969", "3. Королевский замок 1970-1972"])
 
     const [name, setName] = useState("test name")
-    const [idSearchAtt, setIdSearchAtt] = useState("test search")
+    const [id_search_attempts, setIdSearchAtt] = useState("test search")
     const [description, setDescription] = useState("test desc")
 
     useEffect(() => {
@@ -15,32 +16,53 @@ const Finds = () => {
             })
     }, [])
 
+    const submit = (event) => {
+        event.preventDefault()
+        let request = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({name,id_search_attempts, description})
+        }
+        fetch("test.com", request)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Место успешно добавлено")
+                } else {
+                    alert("Ошибка добавления места")
+                }
+            })
+    }
 
     return (
             <div className={"forms_wrapper"}>
-                <form className="form_wrapper">
-                    Добавить находку
+                <form className="form_wrapper"  onSubmit={submit}>
+                <span className={"title_form"}>Добавить находку</span>
                     <div>
-                        <p>* Название находки</p>
-                        <input className="form_input"/>
+                        <p className={"title_field"}>* Название находки</p>
+                        <input className="form_input" onChange={(event) => {setName(event.target.value)}}/>
                     </div>
                     <div>
-                        <p>* Описание</p>
-                        <input className="form_input"/>
+                        <p className={"title_field"}>* Описание</p>
+                        <input className="form_input" onChange={(event) => {setDescription(event.target.value)}}/>
                     </div>
                     <div>
-                        <p>* ID попытки поиска</p>
-                        <input className="form_input"/>
+                        <p className={"title_field"}>* ID попытки поиска</p>
+                        <select name="select" size="3" multiple className="select_form"
+                        onChange={(event) => {setIdSearchAtt(event.target.value)}}>
+                        {idSearchAttList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
+                    </select>
                     </div>
-                    <button type={"submit"}>Отправить</button>
+                    <button className={"submit_button"}>Отправить</button>
                 </form>
                 <div className="form_wrapper">
-                        Найти находку
+                <span className={"title_form"}>Найти находку</span>
                         <div>
-                            <p>* Введите номер попытки поиска</p>
+                            <p className={"title_field"}>* Введите номер попытки поиска</p>
                             <input className="form_input"/>
                         </div>
-                    Список находок
+                    <p className={"title_field"}>Результаты поиска</p>
                     <div className="scroll-table">
                         <table>
                             <thead>
