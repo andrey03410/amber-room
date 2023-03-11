@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 
 const Persons = () => {
     const [persons, setPersons] = useState([])
+    const [nationalityList, setNationalityList] = useState(["СССР", "Германия", "Польша", "Украина"])
 
     const [name, setName] = useState("test name")
-    const [id_nationality, setNationality] = useState("test nationality")
+    const [id_nationality, setNationality] = useState("1")
     const [description, setDescription] = useState("test desc")
 
     useEffect(() => {
@@ -15,28 +16,45 @@ const Persons = () => {
             })
     }, [])
 
+    const submit = (event) => {
+        event.preventDefault()
+        let request = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({name, id_nationality, description})
+        }
+        fetch("test.com", request)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Персона успешно добавлена")
+                } else {
+                    alert("Ошибка добавления")
+                }
+            })
+    }
+
     return (
         <div className="forms_wrapper">
-            <form className="form_wrapper">
-                Добавить персону
+            <form className="form_wrapper" onSubmit={submit}>
+                <span className={"title_form"}>Добавить персону</span>
                 <div>
-                    <p>* ФИО</p>
-                    <input className="form_input"/>
+                    <p className={"title_field"}>* ФИО</p>
+                    <input className="form_input" onChange={(event) => {setName(event.target.value)}}/>
                 </div>
                 <div>
-                    <p>* Гражданство</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option selected value="s1">СССР</option>
-                        <option value="s2">Германия</option>
-                        <option value="s3">Польша</option>
-                        <option value="s4">Украина</option>
+                    <p className={"title_field"}>* Гражданство</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setNationality(event.target.value)}}>
+                        {nationalityList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
                 <div>
-                    <p>Описание</p>
-                    <textarea className="form_input"/>
+                    <p className={"title_field"}>Описание</p>
+                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
                 </div>
-                <button>Отправить</button>
+                <button className={"submit_button"}>Отправить</button>
             </form>
 
             <form className="form_wrapper">

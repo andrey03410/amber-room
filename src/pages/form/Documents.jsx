@@ -99,7 +99,6 @@ const Documents = () => {
                     {imageDesc.map((item, index) => (
                         <div className="forms_wrapper">
                             <div>
-                                {index}
                                 <input type={"file"}/>
                             </div>
                             <div>

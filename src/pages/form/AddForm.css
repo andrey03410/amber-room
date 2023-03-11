@@ -4,10 +4,10 @@
     /* Параметры границы */
     background: #d3d3d3; /* Цвет фона */
     border-radius: 10px;
-    border: 2px solid #d0c6c6;
     padding: 10px; /* Поля вокруг текста */
     margin-left: auto;
     margin-right: auto;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5)
 }
 
 .form_input {
@@ -89,4 +89,70 @@ details[open] summary {
 
 .scroll-table-body::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.title_form {
+    font-size: 20px;
+    font-style: italic;
+}
+
+.title_field {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.select_form {
+    height: 100px;
+    width: 100%;
+    background: #F7F8FA;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 0 6px;
+}
+
+/* Стили для скролла селекта*/
+.select_form::-webkit-scrollbar {
+    width: 6px;
+}
+
+.select_form::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.select_form::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.textarea_form {
+    resize: none;
+    width: 100%;
+    height: 100px;
+    background: #F7F8FA;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 0 6px;
+}
+
+/* Стили для скролла текстбокса*/
+.textarea_form::-webkit-scrollbar {
+    width: 6px;
+}
+
+.textarea_form::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.textarea_form::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.submit_button {
+    width: 100px;
+    height: 30px;
+    background: #f6f5f5;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
 }
