@@ -15,12 +15,23 @@ const Documents = () => {
     const [description, setDescription] = useState("test desc")
 
     const [imageDesc, setImageDesc] = useState(["test"])
+    const [images, setImages] = useState([null])
     const submit = (event) => {
         event.preventDefault()
+        let formData = new FormData()
+        formData.append("images", images)
+        formData.append("imageDesc", imageDesc)
+        formData.append("id_type_doc", id_type_doc)
+        formData.append("id_search_attempts", id_search_attempts)
+        formData.append("date", date)
+        formData.append("description", description)
+        formData.append("author", author)
+        formData.append("person", person)
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({id_type_doc, id_search_attempts,date, description, author, person, imageDesc})
+            // body: JSON.stringify({id_type_doc, id_search_attempts,date, description, author, person, imageDesc, images})
+            body: formData,
         }
         fetch("test.com", request)
             .then(response => {
@@ -36,11 +47,21 @@ const Documents = () => {
         setImageDesc(prevState => {
             return [...prevState, "123"]
         })
+        setImages(prevState => {
+            return [...prevState, null]
+        })
     }
 
     const delButtonImage = (event) => {
         event.preventDefault()
         setImageDesc(prevState => {
+            let array = [...prevState]
+            if(array.length > 1){
+                array.pop()
+            }
+            return array
+        })
+        setImages(prevState => {
             let array = [...prevState]
             if(array.length > 1){
                 array.pop()
@@ -119,7 +140,15 @@ const Documents = () => {
                     {imageDesc.map((item, index) => (
                         <div className="forms_wrapper">
                             <div>
-                                <input type={"file"}/>
+                                <input type={"file"} onChange={(event) => {
+                                    setImages(prevState => {
+                                        let array = [...prevState]
+                                        array[index] = event.target.files[0]
+                                        console.log(array)
+                                        return array
+                                    })
+
+                                }}/>
                             </div>
                             <div>
                                 <input className="form_input" onChange={(event => {
