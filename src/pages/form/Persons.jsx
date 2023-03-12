@@ -8,6 +8,8 @@ const Persons = () => {
     const [id_nationality, setNationality] = useState("1")
     const [description, setDescription] = useState("test desc")
 
+    const [searchName, setSearchName] = useState("")
+
     useEffect(() => {
         fetch("https://run.mocky.io/v3/b51256bf-3f40-4ca8-96c2-eabb9b408b0a")
             .then(res => res.json())
@@ -61,7 +63,7 @@ const Persons = () => {
                 <span className={"title_form"}>Найти персону</span>
                 <div>
                     <p className={"title_field"}>* ФИО</p>
-                    <input className="form_input"/>
+                    <input className="form_input" onChange={(event) => {setSearchName(event.target.value)}}/>
                 </div>
                 <p className={"title_field"}>Результаты поиска </p>
                 <div className="scroll-table">
@@ -78,36 +80,22 @@ const Persons = () => {
                 <div className="scroll-table-body">
                     <table>
                         <tbody>
-                        {persons.map(item => (
-                            <tr>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.id_nationality}</td>
-                                <td>{item.description}</td>
-                            </tr>
-                        ))}
-                        {persons.map(item => (
-                            <tr>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.id_nationality}</td>
-                                <td>{item.description}</td>
-                            </tr>
-                        ))}
-                        {persons.map(item => (
-                            <tr>
-                                <td>{item.id}</td>
-                                <td>{item.name}</td>
-                                <td>{item.id_nationality}</td>
-                                <td>{item.description}</td>
-                            </tr>
-                        ))}
+                        {persons.map(item => {
+                            if (item.name.includes(searchName)){
+                                return (
+                                    <tr>
+                                        <td>{item.id}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.id_nationality}</td>
+                                        <td>{item.description}</td>
+                                    </tr>
+                                )
+                            }
+                        })}
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
             </form>
         </div>
     );
