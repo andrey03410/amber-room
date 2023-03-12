@@ -81,7 +81,7 @@ const Persons = () => {
                     <table>
                         <tbody>
                         {persons.map(item => {
-                            if (item.name.includes(searchName)){
+                            if (item.name.toLowerCase().includes(searchName.toLowerCase())){
                                 return (
                                     <tr>
                                         <td>{item.id}</td>
