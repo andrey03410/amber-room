@@ -2,14 +2,35 @@ import React, {useEffect, useState} from 'react';
 
 const Documents = () => {
     const [document, setDocument] = useState([])
+    const [idSearchAttList, setIdSearchAttList] = useState(["1. Королевский замок 1949-1956", "2. Королевский замок 1964-1969", "3. Королевский замок 1970-1972"])
+    const [typeDocList, setTypeDocList] = useState(["Акт", "Справка", "Письмо", "Выписка"])
+    const [personList, setPersonList] = useState(["Иванов", "Петров", "Зайцев"])
 
-    const [idTypeDoc, setIdTypeDoc] = useState("test name")
-    const [idSearchAtt, setIdSearchAtt] = useState("test search")
+    const [person, setPerson] = useState("Иванов")
+    const [author, setAuthor] = useState("Петров")
+
+    const [id_type_doc, setIdTypeDoc] = useState("test name")
+    const [id_search_attempts, setIdSearchAtt] = useState("test search")
     const [date, setDate] = useState("test search")
     const [description, setDescription] = useState("test desc")
 
     const [imageDesc, setImageDesc] = useState(["test"])
-
+    const submit = (event) => {
+        event.preventDefault()
+        let request = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({id_type_doc, id_search_attempts,date, description, author, person, imageDesc})
+        }
+        fetch("test.com", request)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Место успешно добавлено")
+                } else {
+                    alert("Ошибка добавления места")
+                }
+            })
+    }
     const addButtonImage = (event) => {
         event.preventDefault()
         setImageDesc(prevState => {
@@ -37,62 +58,61 @@ const Documents = () => {
     }, [])
     return (
         <div className={"forms_wrapper"}>
-            <form className="form_wrapper">
-                Добавить документ
+            <form className="form_wrapper"  onSubmit={submit}>
+                <span className={"title_form"}>Добавить документ</span>
                 <div>
-                    <p>* Тип документа</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option selected value="s1">Справка</option>
-                        <option value="s2">Акт</option>
-                        <option value="s3">Письмо</option>
-                        <option value="s4">Выписка</option>
-                        <option value="s5">Характеристика</option>
+                    <p className={"title_field"}>* Тип документа</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setIdTypeDoc(event.target.value)}}>
+                        {typeDocList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
                 <div>
-                    <p>Попытка поиска</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option selected value="s1">1 (Описание)</option>
-                        <option value="s2">2 (Описание)</option>
-                        <option value="s3">3 (Описание)</option>
-                        <option value="s4">4 (Описание)</option>
+                    <p className={"title_field"}>Попытка поиска</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setIdSearchAtt(event.target.value)}}>
+                        {idSearchAttList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
 
                 <div>
-                    <p>Дата </p>
-                    <input className="form_input"/>
+                    <p className={"title_field"}>Дата </p>
+                    <input className="form_input" onChange={(event) => {setDate(event.target.value)}}/>
                 </div>
                 <div>
-                    <p>Описание </p>
-                    <textarea className="form_input"/>
+                    <p className={"title_field"}>Описание </p>
+                    <textarea className="form_input" onChange={(event) => {setDescription(event.target.value)}}/>
                 </div>
                 <div>
-                    <p>Добавить автора(ов)</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option  selected value="s1" > Иванов</option>
-                        <option value="s2">Петров</option>
-                        <option value="s3">Сидоров</option>
-                        <option value="s4">Пирогов</option>
+                    <p className={"title_field"}>Добавить автора(ов)</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setAuthor(event.target.value)}}>
+                        {personList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
                 <div>
-                    <p>Добавить персон, которые упоминались в документе</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option  selected value="s1" >Иванов</option>
-                        <option value="s2">Петров</option>
-                        <option value="s3">Сидоров</option>
-                        <option value="s4">Пирогов</option>
+                    <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setPerson(event.target.value)}}>
+                        {personList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
                 <div>
-                    <p>Добавить фото </p>
+                    <p className={"title_field"}>Добавить фото </p>
                     <div className="forms_wrapper">
                         <div>
-                            <p>Фото </p>
+                            <p className={"title_field"}>Фото </p>
                         </div>
                         <div>
-                            <p>Описание </p>
+                            <p className={"title_field"}>Описание </p>
                         </div>
                     </div>
 
@@ -117,15 +137,15 @@ const Documents = () => {
                     <button onClick={addButtonImage}>Добавить ячейку</button>
                     <button onClick={delButtonImage}>Удалить ячейку</button>
                 </div>
-                <button type={"submit"}>Отправить</button>
+                <button className={"submit_button"}>Отправить</button>
             </form>
             <div className="form_wrapper">
-                    Найти документ
+                <span className={"title_form"}>Найти документ</span>
                     <div>
-                        <p>* ФИО персоны, которая упоминается в документе</p>
+                        <p className={"title_field"}>* ФИО персоны, которая упоминается в документе</p>
                         <input className="form_input"/>
                     </div>
-                Список документов
+                <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>
