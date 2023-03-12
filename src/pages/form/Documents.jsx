@@ -85,7 +85,7 @@ const Documents = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Описание </p>
-                    <textarea className="form_input" onChange={(event) => {setDescription(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить автора(ов)</p>

@@ -54,7 +54,7 @@ const Indications = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Показание </p>
-                    <textarea className="form_input" onChange={(event) => {setTestimony(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {setTestimony(event.target.value)}}/>
                 </div>
                 <div>
                     <p className={"title_field"}>* Версия</p>
