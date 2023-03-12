@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 const SearchAttempts = () => {
-const [search_attempts, setSearchAt] = useState([])
+    const [search_attempts, setSearchAt] = useState([])
+    const [versionList, setVersionList] = useState(["Королевский замок, западное крыльцо", "Королевский замок, подвал", "Королевский замок, южное крыло"])
 
     const [id_versions, setIdVersion] = useState("test name")
     const [date_start, setDateStart] = useState("date1")
@@ -40,7 +41,12 @@ const [search_attempts, setSearchAt] = useState([])
                 <span className={"title_form"}>Добавить попытку поиска</span>
                     <div>
                         <p className={"title_field"}>* ID версии</p>
-                        <input className="form_input" onChange={(event) => {setIdVersion(event.target.value)}}/>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setIdVersion(event.target.value)}}>
+                        {versionList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
+                    </select>
                     </div>
                     <div>
                         <p className={"title_field"}>Дата начала</p>

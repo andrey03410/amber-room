@@ -3,10 +3,14 @@ import React, {useEffect, useState} from 'react';
 const Indications = () => {
     const [indications, setIndications] = useState([])
 
-    const [idPersons, setIdPersons] = useState("test name")
+    const [personList, setPersonList] = useState(["Иванов", "Петров", "Зайцев"])
+    const [docList, setDocList] = useState(["Отчет о работе...", "Акт...", "Краткая характеристика..."])
+    const [versionList, setVersionList] = useState(["Королевский замок, западное крыльцо", "Королевский замок, подвал", "Королевский замок, южное крыло"])
+    const [id_persons, setIdPersons] = useState("test name")
     const [testimony, setTestimony] = useState("test desc")
-    const [idVersions, setIdVersions] = useState("test desc")
+    const [id_versions, setIdVersions] = useState("test desc")
     const [date, setDate] = useState("test date")
+    const [idDoc, setIdDoc] = useState("test date")
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/10ce9c86-ab08-416a-aafc-4d04a143a995")
@@ -15,55 +19,75 @@ const Indications = () => {
                 setIndications(result.indications)
             })
     }, [])
+
+    const submit = (event) => {
+        event.preventDefault()
+        let request = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({id_persons, testimony, id_versions, date, idDoc})
+        }
+        fetch("test.com", request)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Место успешно добавлено")
+                } else {
+                    alert("Ошибка добавления места")
+                }
+            })
+    }
+
+
+
     return (
         <div className={"forms_wrapper"}>
-            <form className="form_wrapper">
-                Добавить показание
+            <form className="form_wrapper" onSubmit={submit}>
+                <span className={"title_form"}>Добавить показание</span>
                 <div>
-                    <p>* Автор показания</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option  selected value="s1" > Иванов</option>
-                        <option value="s2">Петров</option>
-                        <option value="s3">Сидоров</option>
-                        <option value="s4">Пирогов</option>
+                    <p className={"title_field"}>* Автор показания</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setIdPersons(event.target.value)}}>
+                        {personList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
                 <div>
-                    <p>Показание </p>
-                    <textarea className="form_input"/>
+                    <p className={"title_field"}>Показание </p>
+                    <textarea className="form_input" onChange={(event) => {setTestimony(event.target.value)}}/>
                 </div>
                 <div>
-                    <p>* Версия</p>
-                    <select name="select" size="3" multiple className="form_input">
-                        <option selected value="s1">1 (Описание)</option>
-                        <option value="s2">2 (Описание)</option>
-                        <option value="s3">3 (Описание)</option>
-                        <option value="s4">4 (Описание)</option>
+                    <p className={"title_field"}>* Версия</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setIdVersions(event.target.value)}}>
+                        {versionList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
                     </select>
                 </div>
 
                 <div>
-                    <p>Дата </p>
-                    <input className="form_input"/>
+                    <p className={"title_field"}>Дата </p>
+                    <input className="form_input" onChange={(event) => {setDate(event.target.value)}}/>
                 </div>
-                <p>Документы, с которыми связаны показания</p>
-                <select name="select" size="3" multiple className="form_input">
-                    <option selected value="s1">1</option>
-                    <option value="s2">2</option>
-                    <option value="s3">3</option>
-                    <option value="s4">4</option>
-                </select>
+                <p className={"title_field"}>Документы, с которыми связаны показания</p>
+                    <select name="select" size="3" multiple className="select_form"
+                    onChange={(event) => {setIdDoc(event.target.value)}}>
+                        {docList.map((item, index) => (
+                            <option value={index + 1}>{item}</option>
+                        ))}
+                    </select>
 
 
-                <button type={"submit"}>Отправить</button>
+                <button className={"submit_button"}>Отправить</button>
             </form>
             <div className="form_wrapper">
-                        Найти показание
+                <span className={"title_form"}>Найти показание</span>
                         <div>
-                            <p>* ФИО автора</p>
+                            <p className={"title_field"}>* ФИО автора</p>
                             <input className="form_input"/>
                         </div>
-                Список показаний
+                <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>

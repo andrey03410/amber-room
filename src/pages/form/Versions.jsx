@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 const Versions = () => {
-  const [versions, setVersion] = useState([])
-  const [placeList, setPlaceList] = useState(["Королевский замок", "Штайндамм", "Амаллиенау", "Косма"])
+    const [versions, setVersion] = useState([])
+    const [placeList, setPlaceList] = useState(["Королевский замок", "Штайндамм", "Амаллиенау", "Косма"])
 
     const [id_places, setIdPlaces] = useState("1")
     const [description, setDescription] = useState("test desc")
