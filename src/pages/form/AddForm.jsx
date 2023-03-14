@@ -55,7 +55,6 @@ const AddForm = () => {
                 <summary className={"summary_wrapper"}>Исследование</summary>
                 <Researches/>
             </details>
-
         </div>
     );
 };

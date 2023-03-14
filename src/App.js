@@ -3,10 +3,13 @@ import {Routes, Route, Link} from "react-router-dom";
 import Search from './pages/Search'
 import Map from './pages/Map'
 import AddForm from './pages/form/AddForm'
+import React from "react";
+import {Toaster} from "react-hot-toast";
 
 function App() {
   return (
     <div>
+        <Toaster/>
         <nav className="Navigation">
             <ul className="top-nav">
                 <li className="nav-list"><Link className="nav-ref" to="/Map"><i/>Карта</Link></li>
@@ -21,7 +24,6 @@ function App() {
             <Route path="/" element={<div>About</div>}/>
         </Routes>
     </div>
-
   );
 }
 

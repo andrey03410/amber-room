@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import toast from "react-hot-toast";
+import Toaster from "react-hot-toast";
 
 const Persons = () => {
     const [persons, setPersons] = useState([])
@@ -28,25 +30,28 @@ const Persons = () => {
         fetch("test.com", request)
             .then(response => {
                 if (response.status === 200) {
-                    alert("Персона успешно добавлена")
+                    toast.success("Перона успешно добавлена")
                 } else {
-                    alert("Ошибка добавления")
+                    toast.error("Ошибка добавления персоны")
                 }
             })
     }
-
     return (
         <div className="forms_wrapper">
             <form className="form_wrapper" onSubmit={submit}>
                 <span className={"title_form"}>Добавить персону</span>
                 <div>
                     <p className={"title_field"}>* ФИО</p>
-                    <input className="form_input" onChange={(event) => {setName(event.target.value)}}/>
+                    <input className="form_input" onChange={(event) => {
+                        setName(event.target.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>* Гражданство</p>
                     <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setNationality(event.target.value)}}>
+                            onChange={(event) => {
+                                setNationality(event.target.value)
+                            }}>
                         {nationalityList.map((item, index) => (
                             <option value={index + 1}>{item}</option>
                         ))}
@@ -54,7 +59,9 @@ const Persons = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Описание</p>
-                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setDescription(event.target.value)
+                    }}/>
                 </div>
                 <button className={"submit_button"}>Отправить</button>
             </form>
@@ -63,39 +70,41 @@ const Persons = () => {
                 <span className={"title_form"}>Найти персону</span>
                 <div>
                     <p className={"title_field"}>* ФИО</p>
-                    <input className="form_input" onChange={(event) => {setSearchName(event.target.value)}}/>
+                    <input className="form_input" onChange={(event) => {
+                        setSearchName(event.target.value)
+                    }}/>
                 </div>
                 <p className={"title_field"}>Результаты поиска </p>
                 <div className="scroll-table">
-                <table>
-                    <thead>
+                    <table>
+                        <thead>
                         <tr>
                             <th>id персоны</th>
                             <th>ФИО</th>
                             <th>Гражданство</th>
                             <th>Описание</th>
                         </tr>
-                    </thead>
-                </table>
-                <div className="scroll-table-body">
-                    <table>
-                        <tbody>
-                        {persons.map(item => {
-                            if (item.name.toLowerCase().includes(searchName.toLowerCase())){
-                                return (
-                                    <tr>
-                                        <td>{item.id}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.id_nationality}</td>
-                                        <td>{item.description}</td>
-                                    </tr>
-                                )
-                            }
-                        })}
-                        </tbody>
+                        </thead>
                     </table>
+                    <div className="scroll-table-body">
+                        <table>
+                            <tbody>
+                            {persons.map(item => {
+                                if (item.name.toLowerCase().includes(searchName.toLowerCase())) {
+                                    return (
+                                        <tr>
+                                            <td>{item.id}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.id_nationality}</td>
+                                            <td>{item.description}</td>
+                                        </tr>
+                                    )
+                                }
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
             </form>
         </div>
     );
