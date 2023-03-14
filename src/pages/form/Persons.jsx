@@ -1,22 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
-import Toaster from "react-hot-toast";
+import Select from "react-select";
+
 
 const Persons = () => {
     const [persons, setPersons] = useState([])
-    const [nationalityList, setNationalityList] = useState(["СССР", "Германия", "Польша", "Украина"])
+    const [nationalityList, setNationalityList] = useState([])
 
     const [name, setName] = useState("test name")
     const [id_nationality, setNationality] = useState("1")
     const [description, setDescription] = useState("test desc")
-
     const [searchName, setSearchName] = useState("")
+
+    const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/b51256bf-3f40-4ca8-96c2-eabb9b408b0a")
             .then(res => res.json())
             .then((result) => {
                 setPersons(result.persons)
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/8f71e77d-4787-4d07-a758-01eebb9e1d36")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.nationalityList.map((item, index) => {
+                    array.push({value: index, label: item})
+                })
+                setNationalityList(array)
+                setSelectLoading(false)
             })
     }, [])
 
@@ -48,14 +63,10 @@ const Persons = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>* Гражданство</p>
-                    <select name="select" size="3" multiple className="select_form"
-                            onChange={(event) => {
-                                setNationality(event.target.value)
-                            }}>
-                        {nationalityList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={nationalityList} isLoading={selectLoading} placeholder={"Выберите гражданство"}
+                            onChange={(newValue) => {
+                                setNationality(newValue.value)
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Описание</p>
