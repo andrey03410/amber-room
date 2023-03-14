@@ -28,7 +28,7 @@ const Persons = () => {
             .then((result) => {
                 let array = []
                 result.nationalityList.map((item, index) => {
-                    array.push({value: index, label: item})
+                    array.push({value: index + 1, label: item})
                 })
                 setNationalityList(array)
                 setSelectLoading(false)
