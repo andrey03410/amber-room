@@ -77,13 +77,6 @@ const Versions = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {versions.map(item => (
-                                <tr>
-                                        <td>{item.id}</td>
-                                        <td>{item.id_places}</td>
-                                        <td>{item.description}</td>
-                                </tr>
-                            ))}
 
                             {versions.map(item => {
                                 if (item.id_places.toLowerCase().includes(searchPlaceName.toLowerCase())) {

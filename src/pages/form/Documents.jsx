@@ -10,6 +10,7 @@ const Documents = () => {
 
     const [person, setPerson] = useState("Иванов")
     const [author, setAuthor] = useState("Петров")
+    const [searchName, setSearchName] = useState("")
 
     const [id_type_doc, setIdTypeDoc] = useState("test name")
     const [id_search_attempts, setIdSearchAtt] = useState("test search")
@@ -174,7 +175,9 @@ const Documents = () => {
                 <span className={"title_form"}>Найти документ</span>
                     <div>
                         <p className={"title_field"}>* ФИО персоны, которая упоминается в документе</p>
-                        <input className="form_input"/>
+                    <input className="form_input" onChange={(event) => {
+                        setSearchName(event.target.value)
+                    }}/>
                     </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -192,34 +195,21 @@ const Documents = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {document.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_type_doc}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.date}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
 
-                            {document.map(item => (
-                                <tr>
+                            {document.map(item => {
+                                if (item.id_type_doc.toLowerCase().includes(searchName.toLowerCase())) {
+                                    return (
+                                        <tr>
                                     <td>{item.id}</td>
                                     <td>{item.id_type_doc}</td>
                                     <td>{item.id_search_attempts}</td>
                                     <td>{item.date}</td>
                                     <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {document.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_type_doc}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.date}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
+                                        </tr>
+                                    )
+                                }
+                            })}
+
                             </tbody>
                         </table>
                     </div>
