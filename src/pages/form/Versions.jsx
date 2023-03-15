@@ -8,6 +8,7 @@ const Versions = () => {
 
     const [id_places, setIdPlaces] = useState("1")
     const [description, setDescription] = useState("test desc")
+    const [searchPlaceName, setSearchPlaceName] = useState("")
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/45bf1284-e257-4de8-91b9-ed0e1caa8cb3")
@@ -58,7 +59,9 @@ const Versions = () => {
             <span className={"title_form"}>Найти версию</span>
                                 <div>
                                     <p className={"title_field"}>* Место</p>
-                                    <input className="form_input"/>
+                                <input className="form_input" onChange={(event) => {
+                                    setSearchPlaceName(event.target.value)
+                                }}/>
                                 </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -74,27 +77,19 @@ const Versions = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {versions.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_places}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {versions.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_places}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {versions.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_places}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
+
+                            {versions.map(item => {
+                                if (item.name.toLowerCase().includes(searchPlaceName.toLowerCase())) {
+                                    return (
+                                        <tr>
+                                        <td>{item.id}</td>
+                                        <td>{item.id_places}</td>
+                                        <td>{item.description}</td>
+                                        </tr>
+                                    )
+                                }
+                            })}
+
                             </tbody>
                         </table>
                     </div>

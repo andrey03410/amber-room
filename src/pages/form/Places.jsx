@@ -77,9 +77,9 @@ const Places = () => {
                                 if (item.name.toLowerCase().includes(searchPlaceName.toLowerCase())) {
                                     return (
                                         <tr>
-                                        <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.description}</td>
+                                            <td>{item.id}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.description}</td>
                                         </tr>
                                     )
                                 }
