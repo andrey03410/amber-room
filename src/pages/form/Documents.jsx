@@ -36,7 +36,7 @@ const Documents = () => {
         fetch("test.com", request)
             .then(response => {
             if (response.status === 200) {
-                    toast.success("Перона успешно добавлена")
+                    toast.success("Перcона успешно добавлена")
                 } else {
                     toast.error("Ошибка добавления персоны")
                 }
