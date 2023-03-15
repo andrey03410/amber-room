@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react';
+import toast from "react-hot-toast";
+import Select from "react-select";
 
 const Places = () => {
     const [places, setPlaces] = useState([])
 
     const [name, setName] = useState("test name")
     const [description, setDescription] = useState("test desc")
+    const [searchPlaceName, setSearchPlaceName] = useState("")
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/6de17b9c-0751-418c-b695-b30fc486b6fb")
@@ -52,7 +55,9 @@ const Places = () => {
             <span className={"title_form"}>Найти место</span>
                         <div>
                             <p className={"title_field"}>* Название места</p>
-                            <input className="form_input"/>
+                                <input className="form_input" onChange={(event) => {
+                                    setSearchPlaceName(event.target.value)
+                                }}/>
                         </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -68,27 +73,18 @@ const Places = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {places.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
+                            {places.map(item => {
+                                if (item.name.toLowerCase().includes(searchPlaceName.toLowerCase())) {
+                                    return (
+                                        <tr>
+                                        <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {places.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {places.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
+                                        </tr>
+                                    )
+                                }
+                            })}
+
                             </tbody>
                         </table>
                     </div>

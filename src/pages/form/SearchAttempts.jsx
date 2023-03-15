@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import toast from "react-hot-toast";
+import Select from "react-select";
 
 const SearchAttempts = () => {
     const [search_attempts, setSearchAt] = useState([])
