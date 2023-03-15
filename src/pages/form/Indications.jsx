@@ -29,10 +29,10 @@ const Indications = () => {
         }
         fetch("test.com", request)
             .then(response => {
-                if (response.status === 200) {
-                    alert("Место успешно добавлено")
+            if (response.status === 200) {
+                    toast.success("Перона успешно добавлена")
                 } else {
-                    alert("Ошибка добавления места")
+                    toast.error("Ошибка добавления персоны")
                 }
             })
     }

@@ -14,6 +14,9 @@ const Places = () => {
             })
     }, [])
 
+
+
+
     const submit = (event) => {
         event.preventDefault()
         let request = {
@@ -23,14 +26,15 @@ const Places = () => {
         }
         fetch("test.com", request)
             .then(response => {
-                if (response.status === 200) {
-                    alert("Место успешно добавлено")
+            if (response.status === 200) {
+                    toast.success("Перона успешно добавлена")
                 } else {
-                    alert("Ошибка добавления места")
+                    toast.error("Ошибка добавления персоны")
                 }
             })
     }
     return (
+
         <div className={"forms_wrapper"}>
             <form className="form_wrapper" onSubmit={submit}>
                 <span className={"title_form"}>Добавить место</span>
