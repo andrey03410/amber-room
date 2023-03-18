@@ -15,7 +15,7 @@ const Persons = () => {
     const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/b51256bf-3f40-4ca8-96c2-eabb9b408b0a")
+        fetch("http://127.0.0.1:5000/getPersons")
             .then(res => res.json())
             .then((result) => {
                 setPersons(result.persons)
@@ -42,7 +42,7 @@ const Persons = () => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({name, id_nationality, description})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addPerson", request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Перcона успешно добавлена")
