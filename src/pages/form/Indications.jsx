@@ -5,7 +5,7 @@ import Select from "react-select";
 const Indications = () => {
     const [indications, setIndications] = useState([])
 
-    const [personList, setPersonList] = useState(["Иванов", "Петров", "Зайцев"])
+    const [personList, setPersonList] = useState([])
     const [docList, setDocList] = useState(["Отчет о работе...", "Акт...", "Краткая характеристика..."])
     const [versionList, setVersionList] = useState(["Королевский замок, западное крыльцо", "Королевский замок, подвал", "Королевский замок, южное крыло"])
     const [id_persons, setIdPersons] = useState("test name")
@@ -14,6 +14,24 @@ const Indications = () => {
     const [date, setDate] = useState("test date")
     const [idDoc, setIdDoc] = useState("test date")
 
+    const [selectLoadingPers, setSelectLoadingPers] = useState(true)
+    const [selectLoading, setSelectLoading] = useState(true)
+
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/8a8895a4-d564-4806-9fd7-b8e97bc633ba")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.versionList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setVersionList(array)
+                    setSelectLoading(false)
+                })
+        }, [])
+
+
+
     useEffect(() => {
         fetch("https://run.mocky.io/v3/10ce9c86-ab08-416a-aafc-4d04a143a995")
             .then(res => res.json())
@@ -21,6 +39,19 @@ const Indications = () => {
                 setIndications(result.indications)
             })
     }, [])
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/91aaa078-7bd7-40c1-a998-ada5367fec2d")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.personList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setPersonList(array)
+                    setSelectLoadingPers(false)
+                })
+        }, [])
+
 
     const submit = (event) => {
         event.preventDefault()
@@ -47,12 +78,10 @@ const Indications = () => {
                 <span className={"title_form"}>Добавить показание</span>
                 <div>
                     <p className={"title_field"}>* Автор показания</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdPersons(event.target.value)}}>
-                        {personList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персон"}
+                            onChange={(newValue) => {
+                                setIdPersons(newValue.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Показание </p>
@@ -60,12 +89,10 @@ const Indications = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>* Версия</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdVersions(event.target.value)}}>
-                        {versionList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
+                            onChange={(newValue) => {
+                                setIdVersions(newValue.value)
+                            }}/>
                 </div>
 
                 <div>

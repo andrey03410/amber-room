@@ -56,7 +56,7 @@ const Documents = () => {
 
 
     useEffect(() => {
-        fetch("")
+        fetch("https://run.mocky.io/v3/91aaa078-7bd7-40c1-a998-ada5367fec2d")
             .then(res => res.json())
             .then((result) => {
                 let array = []
@@ -159,19 +159,17 @@ const Documents = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить автора(ов)</p>
-                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персон"}
+                    <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setAuthor(newValue.value)
                     }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setPerson(event.target.value)}}>
-                        {personList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
+                            onChange={(newValue) => {
+                                setPerson(newValue.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить фото </p>
