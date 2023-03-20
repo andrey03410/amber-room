@@ -62,7 +62,7 @@ const Versions = () => {
 
                     <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
                             onChange={(newValue) => {
-                                setPlaceList(newValue.value)
+                                setIdPlaces(newValue.value)
                             }}/>
                 </div>
                 <div>

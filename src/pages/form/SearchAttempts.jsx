@@ -60,7 +60,7 @@ const SearchAttempts = () => {
 
                     <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
                             onChange={(newValue) => {
-                                setVersionList(newValue.value)
+                                setIdVersion(newValue.value)
                             }}/>
                     </div>
                     <div>

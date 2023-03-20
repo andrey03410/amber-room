@@ -4,9 +4,9 @@ import Select from "react-select";
 
 const Documents = () => {
     const [document, setDocument] = useState([])
-    const [idSearchAttList, setIdSearchAttList] = useState(["1. Королевский замок 1949-1956", "2. Королевский замок 1964-1969", "3. Королевский замок 1970-1972"])
+    const [searchAttList, setSearchAttList] = useState([])
     const [typeDocList, setTypeDocList] = useState([])
-    const [personList, setPersonList] = useState(["Иванов", "Петров", "Зайцев"])
+    const [personList, setPersonList] = useState([])
 
     const [person, setPerson] = useState("Иванов")
     const [author, setAuthor] = useState("Петров")
@@ -20,7 +20,9 @@ const Documents = () => {
     const [imageDesc, setImageDesc] = useState(["test"])
     const [images, setImages] = useState([null])
 
-    const [selectLoading, setSelectLoading] = useState(true)
+    const [selectLoadingTypeDoc, setSelectLoadingTypeDoc] = useState(true)
+    const [selectLoadingPers, setSelectLoadingPers] = useState(true)
+    const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
 
 
     useEffect(() => {
@@ -32,10 +34,39 @@ const Documents = () => {
                     array.push({value: index + 1, label: item})
                 })
                 setTypeDocList(array)
-                setSelectLoading(false)
+                setSelectLoadingTypeDoc(false)
             })
     }, [])
 
+
+
+
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/6fb4f175-3709-427a-aa28-c4f56d7f0baf")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.searchAttList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setSearchAttList(array)
+                    setSelectLoadingSearchAtt(false)
+                })
+        }, [])
+
+
+    useEffect(() => {
+        fetch("")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.personList.map((item, index) => {
+                    array.push({value: index + 1, label: item})
+                })
+                setPersonList(array)
+                setSelectLoadingPers(false)
+            })
+    }, [])
 
     const submit = (event) => {
         event.preventDefault()
@@ -105,19 +136,17 @@ const Documents = () => {
                 <div>
                     <p className={"title_field"}>* Тип документа</p>
 
-                    <Select options={typeDocList} isLoading={selectLoading} placeholder={"Выберите гражданство"}
+                    <Select options={typeDocList} isLoading={selectLoadingTypeDoc} placeholder={"Выберите тип документа"}
                             onChange={(newValue) => {
-                                setTypeDocList(newValue.value)
+                                setIdTypeDoc(newValue.value)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Попытка поиска</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdSearchAtt(event.target.value)}}>
-                        {idSearchAttList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={searchAttList} isLoading={selectLoadingSearchAtt} placeholder={"Выберите попытку поиска"}
+                            onChange={(newValue) => {
+                                setIdSearchAtt(newValue.value)
+                            }}/>
                 </div>
 
                 <div>
@@ -130,12 +159,10 @@ const Documents = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить автора(ов)</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setAuthor(event.target.value)}}>
-                        {personList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персон"}
+                            onChange={(newValue) => {
+                                setAuthor(newValue.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>

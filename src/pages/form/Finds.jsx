@@ -66,7 +66,7 @@ const Finds = () => {
 
                     <Select options={searchAttList} isLoading={selectLoading} placeholder={"Выберите попытку поиска"}
                             onChange={(newValue) => {
-                                setSearchAttList(newValue.value)
+                                setIdSearchAtt(newValue.value)
                             }}/>
                     </div>
                     <button className={"submit_button"}>Отправить</button>
