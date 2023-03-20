@@ -4,7 +4,10 @@ import Select from "react-select";
 
 const Versions = () => {
     const [versions, setVersion] = useState([])
-    const [placeList, setPlaceList] = useState(["Королевский замок", "Штайндамм", "Амаллиенау", "Косма"])
+    const [placeList, setPlaceList] = useState([])
+    const [selectLoading, setSelectLoading] = useState(true)
+
+
 
     const [id_places, setIdPlaces] = useState("1")
     const [description, setDescription] = useState("test desc")
@@ -17,6 +20,20 @@ const Versions = () => {
                 setVersion(result.versions)
             })
     }, [])
+
+    useEffect(() => {
+                fetch("https://run.mocky.io/v3/2ffe96d6-7249-424c-84f8-25810987f05e")
+                    .then(res => res.json())
+                    .then((result) => {
+                        let array = []
+                        result.placeList.map((item, index) => {
+                            array.push({value: index + 1, label: item})
+                        })
+                        setPlaceList(array)
+                        setSelectLoading(false)
+                    })
+            }, [])
+
 
     const submit = (event) => {
         event.preventDefault()
@@ -42,12 +59,11 @@ const Versions = () => {
                 <span className={"title_form"}>Добавить версию</span>
                 <div>
                     <p className={"title_field"}>* Место</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdPlaces(event.target.value)}}>
-                        {placeList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+
+                    <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
+                            onChange={(newValue) => {
+                                setPlaceList(newValue.value)
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Описание</p>

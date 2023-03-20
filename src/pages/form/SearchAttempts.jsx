@@ -4,17 +4,31 @@ import Select from "react-select";
 
 const SearchAttempts = () => {
     const [search_attempts, setSearchAt] = useState([])
-    const [versionList, setVersionList] = useState(["Королевский замок, западное крыльцо", "Королевский замок, подвал", "Королевский замок, южное крыло"])
+    const [versionList, setVersionList] = useState([])
 
     const [id_versions, setIdVersion] = useState("test name")
     const [date_start, setDateStart] = useState("date1")
     const [date_finish, setDateFinish] = useState("date2")
+    const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/1a2e2b8c-1311-4251-b99e-68e8df57062c")
             .then(res => res.json())
             .then((result) => {
                 setSearchAt(result.search_attempts)
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/8a8895a4-d564-4806-9fd7-b8e97bc633ba")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.versionList.map((item, index) => {
+                    array.push({value: index + 1, label: item})
+                })
+                setVersionList(array)
+                setSelectLoading(false)
             })
     }, [])
 
@@ -43,12 +57,11 @@ const SearchAttempts = () => {
                 <span className={"title_form"}>Добавить попытку поиска</span>
                     <div>
                         <p className={"title_field"}>* ID версии</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdVersion(event.target.value)}}>
-                        {versionList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+
+                    <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
+                            onChange={(newValue) => {
+                                setVersionList(newValue.value)
+                            }}/>
                     </div>
                     <div>
                         <p className={"title_field"}>Дата начала</p>

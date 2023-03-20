@@ -5,7 +5,7 @@ import Select from "react-select";
 const Documents = () => {
     const [document, setDocument] = useState([])
     const [idSearchAttList, setIdSearchAttList] = useState(["1. Королевский замок 1949-1956", "2. Королевский замок 1964-1969", "3. Королевский замок 1970-1972"])
-    const [typeDocList, setTypeDocList] = useState(["Акт", "Справка", "Письмо", "Выписка"])
+    const [typeDocList, setTypeDocList] = useState([])
     const [personList, setPersonList] = useState(["Иванов", "Петров", "Зайцев"])
 
     const [person, setPerson] = useState("Иванов")
@@ -19,6 +19,24 @@ const Documents = () => {
 
     const [imageDesc, setImageDesc] = useState(["test"])
     const [images, setImages] = useState([null])
+
+    const [selectLoading, setSelectLoading] = useState(true)
+
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/e0da3604-56e0-4420-b046-86d54d9c4ddc")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.typeDocList.map((item, index) => {
+                    array.push({value: index + 1, label: item})
+                })
+                setTypeDocList(array)
+                setSelectLoading(false)
+            })
+    }, [])
+
+
     const submit = (event) => {
         event.preventDefault()
         let formData = new FormData()
@@ -86,12 +104,11 @@ const Documents = () => {
                 <span className={"title_form"}>Добавить документ</span>
                 <div>
                     <p className={"title_field"}>* Тип документа</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdTypeDoc(event.target.value)}}>
-                        {typeDocList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+
+                    <Select options={typeDocList} isLoading={selectLoading} placeholder={"Выберите гражданство"}
+                            onChange={(newValue) => {
+                                setTypeDocList(newValue.value)
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Попытка поиска</p>

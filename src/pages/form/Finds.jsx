@@ -4,17 +4,31 @@ import Select from "react-select";
 
 const Finds = () => {
     const [find, setFind] = useState([])
-    const [idSearchAttList, setIdSearchAttList] = useState(["1. Королевский замок 1949-1956", "2. Королевский замок 1964-1969", "3. Королевский замок 1970-1972"])
+    const [searchAttList, setSearchAttList] = useState([])
 
     const [name, setName] = useState("test name")
     const [id_search_attempts, setIdSearchAtt] = useState("test search")
     const [description, setDescription] = useState("test desc")
+    const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/0675be50-5496-41fb-b182-d9f435e5c241")
             .then(res => res.json())
             .then((result) => {
                 setFind(result.find)
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("https://run.mocky.io/v3/6fb4f175-3709-427a-aa28-c4f56d7f0baf")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.searchAttList.map((item, index) => {
+                    array.push({value: index + 1, label: item})
+                })
+                setSearchAttList(array)
+                setSelectLoading(false)
             })
     }, [])
 
@@ -49,12 +63,11 @@ const Finds = () => {
                     </div>
                     <div>
                         <p className={"title_field"}>* ID попытки поиска</p>
-                        <select name="select" size="3" multiple className="select_form"
-                        onChange={(event) => {setIdSearchAtt(event.target.value)}}>
-                        {idSearchAttList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+
+                    <Select options={searchAttList} isLoading={selectLoading} placeholder={"Выберите попытку поиска"}
+                            onChange={(newValue) => {
+                                setSearchAttList(newValue.value)
+                            }}/>
                     </div>
                     <button className={"submit_button"}>Отправить</button>
                 </form>
