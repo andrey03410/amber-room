@@ -4,10 +4,10 @@ import Select from "react-select";
 
 const Researches = () => {
     const [research, setResearch] = useState([])
+    const [searchAttList, setSearchAttList] = useState([])
 
-    const [orgList, setOrgList] = useState(["КГАЭ", " Московский Исторический Музей", "Музей искусства"])
-    const [typeResList, setTypeResList] = useState(["Раскопки", "Бурение", "Осмотр"])
-    const [idSearchAttList, setIdSearchAttList] = useState(["1. Королевский замок 1949-1956", "2. Королевский замок 1964-1969", "3. Королевский замок 1970-1972"])
+    const [orgList, setOrgList] = useState([])
+    const [typeResList, setTypeResList] = useState([])
 
     const [id_organization, setIdOrganization] = useState("test name")
     const [id_search_attempts, setIdSearchAtt] = useState("test name")
@@ -15,6 +15,49 @@ const Researches = () => {
     const [id_type_research, setIdTypeResearch] = useState("test desc")
     const [local_place, setLocalPlace] = useState("test desc")
     const [technique, setTechnique] = useState("test desc")
+
+    const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
+    const [selectLoadingOrg, setSelectLoadingOrg] = useState(true)
+    const [selectLoadingTypeRes, setSelectLoadingTypeRes] = useState(true)
+
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/bd0a2a47-853a-4874-9fdb-ccbb439001c1")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.orgList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setOrgList(array)
+                    setSelectLoadingOrg(false)
+                })
+        }, [])
+
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/39fb8321-4ba7-40f9-bde4-df8b9f1f1a73")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.typeResList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setTypeResList(array)
+                    setSelectLoadingTypeRes(false)
+                })
+        }, [])
+
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/6fb4f175-3709-427a-aa28-c4f56d7f0baf")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.searchAttList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setSearchAttList(array)
+                    setSelectLoadingSearchAtt(false)
+                })
+        }, [])
 
     useEffect(() => {
         fetch("https://run.mocky.io/v3/6f9278ec-35f5-4e5c-938e-81830b57de35")
@@ -48,21 +91,17 @@ const Researches = () => {
                 <span className={"title_form"}>Добавить исследование</span>
                 <div>
                     <p className={"title_field"}>Организация</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdOrganization(event.target.value)}}>
-                        {orgList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={orgList} isLoading={selectLoadingOrg} placeholder={"Выберите попытку поиска"}
+                            onChange={(newValue) => {
+                                setIdOrganization(newValue.value)
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>* Попытка поиска</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdSearchAtt(event.target.value)}}>
-                        {idSearchAttList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={searchAttList} isLoading={selectLoadingSearchAtt} placeholder={"Выберите попытку поиска"}
+                            onChange={(newValue) => {
+                                setIdSearchAtt(newValue.value)
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Описание </p>
@@ -70,12 +109,10 @@ const Researches = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>* Тип исследования</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdTypeResearch(event.target.value)}}>
-                        {typeResList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите попытку поиска"}
+                            onChange={(newValue) => {
+                                setIdTypeResearch(newValue.value)
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Локальное место </p>

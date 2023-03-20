@@ -16,6 +16,7 @@ const Indications = () => {
 
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
     const [selectLoading, setSelectLoading] = useState(true)
+    const [selectLoadingDocs, setSelectLoadingDocs] = useState(true)
 
         useEffect(() => {
             fetch("https://run.mocky.io/v3/8a8895a4-d564-4806-9fd7-b8e97bc633ba")
@@ -30,6 +31,18 @@ const Indications = () => {
                 })
         }, [])
 
+        useEffect(() => {
+            fetch("https://run.mocky.io/v3/d23e90dc-0ac2-4506-929b-e5b9e234b28e")
+                .then(res => res.json())
+                .then((result) => {
+                    let array = []
+                    result.docList.map((item, index) => {
+                        array.push({value: index + 1, label: item})
+                    })
+                    setDocList(array)
+                    setSelectLoadingDocs(false)
+                })
+        }, [])
 
 
     useEffect(() => {
@@ -100,12 +113,10 @@ const Indications = () => {
                     <input className="form_input" onChange={(event) => {setDate(event.target.value)}}/>
                 </div>
                 <p className={"title_field"}>Документы, с которыми связаны показания</p>
-                    <select name="select" size="3" multiple className="select_form"
-                    onChange={(event) => {setIdDoc(event.target.value)}}>
-                        {docList.map((item, index) => (
-                            <option value={index + 1}>{item}</option>
-                        ))}
-                    </select>
+                    <Select options={docList} isLoading={selectLoading} isMulti placeholder={"Выберите документ(ы)"}
+                            onChange={(newValue) => {
+                                setIdDoc(newValue.value)
+                            }}/>
 
 
                 <button className={"submit_button"}>Отправить</button>
