@@ -132,9 +132,10 @@ const Researches = () => {
                 <span className={"title_form"}>Найти исследование</span>
                                 <div>
                                     <p className={"title_field"}>* Тип исследования</p>
-                                <input className="form_input" onChange={(event) => {
-                                    setSearchTypeRes(event.target.value)
-                                }}/>
+                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите место"}
+                            onChange={(newValue) => {
+                                setSearchTypeRes(newValue.value)
+                            }}/>
                                 </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -154,7 +155,7 @@ const Researches = () => {
                         <table>
                             <tbody>
                             {research.map(item => {
-                                if (item.id_type_research.toLowerCase().includes(searchTypeRes.toLowerCase())) {
+                                if (item.id_type_research.toLowerCase().includes(searchTypeRes)) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>

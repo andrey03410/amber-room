@@ -83,9 +83,10 @@ const SearchAttempts = () => {
             <span className={"title_form"}>Найти попытку поиска</span>
                     <div>
                         <p className={"title_field"}>* Версия</p>
-                                <input className="form_input" onChange={(event) => {
-                                    setSearchVersion(event.target.value)
-                                }}/>
+                    <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
+                            onChange={(newValue) => {
+                                setSearchVersion(newValue.value)
+                            }}/>
                     </div>
                 <p className={"title_field"}>Результаты поиска</p>
 
@@ -104,7 +105,7 @@ const SearchAttempts = () => {
                             <table>
                                 <tbody>
                                 {search_attempts.map(item => {
-                                if (item.id_versions.toLowerCase().includes(searchVersion.toLowerCase())) {
+                                if (item.id_versions.toLowerCase().includes(searchVersion)) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>

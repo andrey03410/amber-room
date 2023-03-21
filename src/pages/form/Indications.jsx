@@ -126,9 +126,10 @@ const Indications = () => {
                 <span className={"title_form"}>Найти показание</span>
                         <div>
                             <p className={"title_field"}>* ФИО автора</p>
-                                <input className="form_input" onChange={(event) => {
-                                    setSearchAuthor(event.target.value)
-                                }}/>
+                    <Select options={personList} isLoading={selectLoading} placeholder={"Выберите место"}
+                            onChange={(newValue) => {
+                                setSearchAuthor(newValue.value)
+                            }}/>
                         </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -147,7 +148,7 @@ const Indications = () => {
                         <table>
                             <tbody>
                             {indications.map(item => {
-                                if (item.id_persons.toLowerCase().includes(searchAuthor.toLowerCase())) {
+                                if (item.id_persons.toLowerCase().includes(searchAuthor)) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>

@@ -76,9 +76,10 @@ const Finds = () => {
                 <span className={"title_form"}>Найти находку</span>
                         <div>
                             <p className={"title_field"}>* Введите номер попытки поиска</p>
-                                <input className="form_input" onChange={(event) => {
-                                    setSearchSearchAtt(event.target.value)
-                                }}/>
+                    <Select options={searchAttList} isLoading={selectLoading} placeholder={"Выберите место"}
+                            onChange={(newValue) => {
+                                setSearchSearchAtt(newValue.value)
+                            }}/>
                         </div>
                     <p className={"title_field"}>Результаты поиска</p>
                     <div className="scroll-table">
@@ -96,7 +97,7 @@ const Finds = () => {
                         <table>
                             <tbody>
                             {find.map(item => {
-                                if (item.name.toLowerCase().includes(searchSearchAtt.toLowerCase())) {
+                                if (item.name.toLowerCase().includes(searchSearchAtt)) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>
