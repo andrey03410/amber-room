@@ -16,7 +16,7 @@ const Versions = () => {
     const [searchPlaceName, setSearchPlaceName] = useState("")
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/45bf1284-e257-4de8-91b9-ed0e1caa8cb3")
+        fetch("https://run.mocky.io/v3/92bd264e-439c-4956-a48e-44d0eb84a5cd")
             .then(res => res.json())
             .then((result) => {
                 setVersion(result.versions)
@@ -79,9 +79,7 @@ const Versions = () => {
             <span className={"title_form"}>Найти версию</span>
                                 <div>
                                     <p className={"title_field"}>* Место</p>
-                                <input className="form_input" onChange={(event) => {
-                                    setSearchPlaceName(event.target.value)
-                                }}/>
+
                     <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
                             onChange={(newValue) => {
                                 setSearchPlaceName(newValue.value)
@@ -103,7 +101,7 @@ const Versions = () => {
                             <tbody>
 
                             {versions.map(item => {
-                                if (item.id_places.toLowerCase().includes(searchPlaceName.toLowerCase())) {
+                                if (item.id_places.toLowerCase().includes(searchPlaceName)) {
                                     return (
                                         <tr>
                                         <td>{item.id}</td>
