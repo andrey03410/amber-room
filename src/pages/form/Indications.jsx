@@ -126,7 +126,7 @@ const Indications = () => {
                 <span className={"title_form"}>Найти показание</span>
                         <div>
                             <p className={"title_field"}>* ФИО автора</p>
-                    <Select options={personList} isLoading={selectLoading} placeholder={"Выберите место"}
+                    <Select options={personList} isLoading={selectLoading} placeholder={"Выберите ФИО автора"}
                             onChange={(newValue) => {
                                 setSearchAuthor(newValue.value)
                             }}/>

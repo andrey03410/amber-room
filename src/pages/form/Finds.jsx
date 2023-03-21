@@ -76,7 +76,7 @@ const Finds = () => {
                 <span className={"title_form"}>Найти находку</span>
                         <div>
                             <p className={"title_field"}>* Введите номер попытки поиска</p>
-                    <Select options={searchAttList} isLoading={selectLoading} placeholder={"Выберите место"}
+                    <Select options={searchAttList} isLoading={selectLoading} placeholder={"Выберите попытку поиска"}
                             onChange={(newValue) => {
                                 setSearchSearchAtt(newValue.value)
                             }}/>

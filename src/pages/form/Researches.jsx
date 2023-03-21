@@ -93,7 +93,7 @@ const Researches = () => {
                 <span className={"title_form"}>Добавить исследование</span>
                 <div>
                     <p className={"title_field"}>Организация</p>
-                    <Select options={orgList} isLoading={selectLoadingOrg} placeholder={"Выберите попытку поиска"}
+                    <Select options={orgList} isLoading={selectLoadingOrg} placeholder={"Выберите организацию"}
                             onChange={(newValue) => {
                                 setIdOrganization(newValue.value)
                             }}/>
@@ -111,7 +111,7 @@ const Researches = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>* Тип исследования</p>
-                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите попытку поиска"}
+                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите тип исследования"}
                             onChange={(newValue) => {
                                 setIdTypeResearch(newValue.value)
                             }}/>
@@ -132,7 +132,7 @@ const Researches = () => {
                 <span className={"title_form"}>Найти исследование</span>
                                 <div>
                                     <p className={"title_field"}>* Тип исследования</p>
-                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите место"}
+                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите тип исследования"}
                             onChange={(newValue) => {
                                 setSearchTypeRes(newValue.value)
                             }}/>
