@@ -46,9 +46,9 @@ const Versions = () => {
         fetch("test.com", request)
             .then(response => {
             if (response.status === 200) {
-                    toast.success("Перcона успешно добавлена")
+                    toast.success("Версия успешно добавлена")
                 } else {
-                    toast.error("Ошибка добавления персоны")
+                    toast.error("Ошибка добавления версии")
                 }
             })
     }

@@ -47,9 +47,9 @@ const SearchAttempts = () => {
         fetch("test.com", request)
             .then(response => {
             if (response.status === 200) {
-                    toast.success("Перcона успешно добавлена")
+                    toast.success("Попытка поиска успешно добавлена")
                 } else {
-                    toast.error("Ошибка добавления персоны")
+                    toast.error("Ошибка добавления попытки поиска")
                 }
             })
     }

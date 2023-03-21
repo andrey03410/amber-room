@@ -88,9 +88,9 @@ const Documents = () => {
         fetch("test.com", request)
             .then(response => {
             if (response.status === 200) {
-                    toast.success("Перcона успешно добавлена")
+                    toast.success("Документ успешно добавлен")
                 } else {
-                    toast.error("Ошибка добавления персоны")
+                    toast.error("Ошибка добавления документа")
                 }
             })
     }
