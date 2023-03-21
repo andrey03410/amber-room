@@ -7,6 +7,8 @@ const Versions = () => {
     const [placeList, setPlaceList] = useState([])
     const [selectLoading, setSelectLoading] = useState(true)
 
+    //const [selectLoadingSearch, setSelectLoadingSearch] = useState(true)
+
 
 
     const [id_places, setIdPlaces] = useState("1")
@@ -80,6 +82,10 @@ const Versions = () => {
                                 <input className="form_input" onChange={(event) => {
                                     setSearchPlaceName(event.target.value)
                                 }}/>
+                    <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
+                            onChange={(newValue) => {
+                                setSearchPlaceName(newValue.value)
+                            }}/>
                                 </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
