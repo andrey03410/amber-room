@@ -4,6 +4,7 @@ import Select from "react-select";
 
 const Indications = () => {
     const [indications, setIndications] = useState([])
+    const [searchAuthor, setSearchAuthor] = useState("")
 
     const [personList, setPersonList] = useState([])
     const [docList, setDocList] = useState(["Отчет о работе...", "Акт...", "Краткая характеристика..."])
@@ -125,7 +126,9 @@ const Indications = () => {
                 <span className={"title_form"}>Найти показание</span>
                         <div>
                             <p className={"title_field"}>* ФИО автора</p>
-                            <input className="form_input"/>
+                                <input className="form_input" onChange={(event) => {
+                                    setSearchAuthor(event.target.value)
+                                }}/>
                         </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -143,33 +146,20 @@ const Indications = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {indications.map(item => (
-                                <tr>
+                            {indications.map(item => {
+                                if (item.id_persons.toLowerCase().includes(searchAuthor.toLowerCase())) {
+                                    return (
+                                        <tr>
                                     <td>{item.id}</td>
                                     <td>{item.id_persons}</td>
                                     <td>{item.testimony}</td>
                                     <td>{item.id_versions}</td>
                                     <td>{item.date}</td>
-                                </tr>
-                            ))}
-                            {indications.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_persons}</td>
-                                    <td>{item.testimony}</td>
-                                    <td>{item.id_versions}</td>
-                                    <td>{item.date}</td>
-                                </tr>
-                            ))}
-                            {indications.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_persons}</td>
-                                    <td>{item.testimony}</td>
-                                    <td>{item.id_versions}</td>
-                                    <td>{item.date}</td>
-                                </tr>
-                            ))}
+                                        </tr>
+                                    )
+                                }
+                            })}
+
                             </tbody>
                         </table>
                     </div>

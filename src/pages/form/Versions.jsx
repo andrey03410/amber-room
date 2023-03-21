@@ -7,9 +7,6 @@ const Versions = () => {
     const [placeList, setPlaceList] = useState([])
     const [selectLoading, setSelectLoading] = useState(true)
 
-    //const [selectLoadingSearch, setSelectLoadingSearch] = useState(true)
-
-
 
     const [id_places, setIdPlaces] = useState("1")
     const [description, setDescription] = useState("test desc")

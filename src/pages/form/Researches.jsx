@@ -5,6 +5,8 @@ import Select from "react-select";
 const Researches = () => {
     const [research, setResearch] = useState([])
     const [searchAttList, setSearchAttList] = useState([])
+    const [searchTypeRes, setSearchTypeRes] = useState("")
+
 
     const [orgList, setOrgList] = useState([])
     const [typeResList, setTypeResList] = useState([])
@@ -130,7 +132,9 @@ const Researches = () => {
                 <span className={"title_form"}>Найти исследование</span>
                                 <div>
                                     <p className={"title_field"}>* Тип исследования</p>
-                                    <input className="form_input"/>
+                                <input className="form_input" onChange={(event) => {
+                                    setSearchTypeRes(event.target.value)
+                                }}/>
                                 </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
@@ -149,36 +153,21 @@ const Researches = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {research.map(item => (
-                                <tr>
+                            {research.map(item => {
+                                if (item.id_type_research.toLowerCase().includes(searchTypeRes.toLowerCase())) {
+                                    return (
+                                        <tr>
                                     <td>{item.id}</td>
                                     <td>{item.id_organization}</td>
                                     <td>{item.id_search_attempts}</td>
                                     <td>{item.description}</td>
                                     <td>{item.id_type_research}</td>
                                     <td>{item.local_place}</td>
-                                </tr>
-                            ))}
-                            {research.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_organization}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.id_type_research}</td>
-                                    <td>{item.local_place}</td>
-                                </tr>
-                            ))}
-                            {research.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_organization}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.id_type_research}</td>
-                                    <td>{item.local_place}</td>
-                                </tr>
-                            ))}
+                                        </tr>
+                                    )
+                                }
+                            })}
+
                             </tbody>
                         </table>
                     </div>

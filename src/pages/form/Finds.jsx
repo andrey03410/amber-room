@@ -5,6 +5,7 @@ import Select from "react-select";
 const Finds = () => {
     const [find, setFind] = useState([])
     const [searchAttList, setSearchAttList] = useState([])
+    const [searchSearchAtt, setSearchSearchAtt] = useState("")
 
     const [name, setName] = useState("test name")
     const [id_search_attempts, setIdSearchAtt] = useState("test search")
@@ -75,7 +76,9 @@ const Finds = () => {
                 <span className={"title_form"}>Найти находку</span>
                         <div>
                             <p className={"title_field"}>* Введите номер попытки поиска</p>
-                            <input className="form_input"/>
+                                <input className="form_input" onChange={(event) => {
+                                    setSearchSearchAtt(event.target.value)
+                                }}/>
                         </div>
                     <p className={"title_field"}>Результаты поиска</p>
                     <div className="scroll-table">
@@ -92,30 +95,18 @@ const Finds = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {find.map(item => (
-                                <tr>
+                            {find.map(item => {
+                                if (item.name.toLowerCase().includes(searchSearchAtt.toLowerCase())) {
+                                    return (
+                                        <tr>
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.id_search_attempts}</td>
                                     <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {find.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
-                            {find.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.description}</td>
-                                </tr>
-                            ))}
+                                        </tr>
+                                    )
+                                }
+                            })}
 
 
                             </tbody>

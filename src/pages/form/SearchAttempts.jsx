@@ -5,9 +5,13 @@ import Select from "react-select";
 const SearchAttempts = () => {
     const [search_attempts, setSearchAt] = useState([])
     const [versionList, setVersionList] = useState([])
+    const [dateList, setDateList] = useState([])
+
+    const [searchVersion, setSearchVersion] = useState("")
 
     const [id_versions, setIdVersion] = useState("test name")
     const [date_start, setDateStart] = useState("date1")
+
     const [date_finish, setDateFinish] = useState("date2")
     const [selectLoading, setSelectLoading] = useState(true)
 
@@ -15,6 +19,7 @@ const SearchAttempts = () => {
         fetch("https://run.mocky.io/v3/1a2e2b8c-1311-4251-b99e-68e8df57062c")
             .then(res => res.json())
             .then((result) => {
+
                 setSearchAt(result.search_attempts)
             })
     }, [])
@@ -77,8 +82,10 @@ const SearchAttempts = () => {
                 <div className="form_wrapper">
             <span className={"title_form"}>Найти попытку поиска</span>
                     <div>
-                        <p className={"title_field"}>* Дата начала</p>
-                        <input className="form_input"/>
+                        <p className={"title_field"}>* Версия</p>
+                                <input className="form_input" onChange={(event) => {
+                                    setSearchVersion(event.target.value)
+                                }}/>
                     </div>
                 <p className={"title_field"}>Результаты поиска</p>
 
@@ -96,31 +103,19 @@ const SearchAttempts = () => {
                         <div className="scroll-table-body">
                             <table>
                                 <tbody>
+                                {search_attempts.map(item => {
+                                if (item.id_versions.toLowerCase().includes(searchVersion.toLowerCase())) {
+                                    return (
+                                        <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.id_versions}</td>
+                                    <td>{item.date_start}</td>
+                                    <td>{item.date_finish}</td>
+                                        </tr>
+                                    )
+                                }
+                            })}
 
-                                {search_attempts.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_versions}</td>
-                                    <td>{item.date_start}</td>
-                                    <td>{item.date_finish}</td>
-                                </tr>
-                                ))}
-                                {search_attempts.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_versions}</td>
-                                    <td>{item.date_start}</td>
-                                    <td>{item.date_finish}</td>
-                                </tr>
-                                ))}
-                                {search_attempts.map(item => (
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_versions}</td>
-                                    <td>{item.date_start}</td>
-                                    <td>{item.date_finish}</td>
-                                </tr>
-                                ))}
                                 </tbody>
                             </table>
                         </div>
