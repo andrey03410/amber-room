@@ -63,8 +63,9 @@ details[open] summary {
     font-weight: bold;
     text-align: left;
     border: none;
+    border-radius: 3px;
     padding: 10px 15px;
-    background: #d8d8d8;
+    background: #C0C0C0;
     font-size: 14px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
@@ -75,7 +76,8 @@ details[open] summary {
     padding: 10px 15px;
     font-size: 14px;
     vertical-align: top;
-    border: 1px solid #000000;
+    background: #F7F8FA;
+    border-radius: 3px;
 }
 
 /* Стили для скролла таблицы*/
@@ -156,4 +158,6 @@ details[open] summary {
     box-sizing: border-box;
     border-radius: 6px;
     margin-top: 6px;
+
+
 }
