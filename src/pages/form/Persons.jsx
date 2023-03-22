@@ -88,9 +88,13 @@ const Persons = () => {
                 <p className={"title_field"}>Результаты поиска </p>
                 <div className="scroll-table">
                     <table>
+                        <col width='8%' valign="top"/>
+                        <col width="25%" valign="top"/>
+                        <col width="25%" valign="top"/>
+                        <col width="42%" valign="top"/>
                         <thead>
                         <tr>
-                            <th>id персоны</th>
+                            <th>ID</th>
                             <th>ФИО</th>
                             <th>Гражданство</th>
                             <th>Описание</th>
@@ -99,6 +103,10 @@ const Persons = () => {
                     </table>
                     <div className="scroll-table-body">
                         <table>
+                            <col width='8%' valign="top"/>
+                            <col width="25%" valign="top"/>
+                            <col width="25%" valign="top"/>
+                            <col width="42%" valign="top"/>
                             <tbody>
                             {persons.map(item => {
                                 if (item.name.toLowerCase().includes(searchName.toLowerCase())) {
