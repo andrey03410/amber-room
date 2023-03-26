@@ -23,15 +23,18 @@ const Persons = () => {
     }, [])
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/8f71e77d-4787-4d07-a758-01eebb9e1d36")
+        fetch("http://127.0.0.1:5000/getNationality")
             .then(res => res.json())
             .then((result) => {
                 let array = []
-                result.nationalityList.map((item, index) => {
-                    array.push({value: index + 1, label: item})
+                //console.log(result.nationality)
+                result.nationality.map((item) => {
+                    array.push({value: item.id, label: item.nationality})
                 })
                 setNationalityList(array)
                 setSelectLoading(false)
+
+
             })
     }, [])
 
