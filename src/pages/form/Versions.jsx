@@ -13,7 +13,7 @@ const Versions = () => {
     const [searchPlaceName, setSearchPlaceName] = useState("")
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/92bd264e-439c-4956-a48e-44d0eb84a5cd")
+        fetch("http://127.0.0.1:5000/getVersions")
             .then(res => res.json())
             .then((result) => {
                 setVersion(result.versions)
@@ -98,7 +98,7 @@ const Versions = () => {
                             <tbody>
 
                             {versions.map(item => {
-                                if (item.id_places.toLowerCase().includes(searchPlaceName)) {
+                                if (item.id_places === searchPlaceName) {
                                     return (
                                         <tr>
                                         <td>{item.id}</td>

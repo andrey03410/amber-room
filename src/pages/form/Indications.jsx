@@ -47,7 +47,7 @@ const Indications = () => {
 
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/10ce9c86-ab08-416a-aafc-4d04a143a995")
+        fetch("http://127.0.0.1:5000/getIndication")
             .then(res => res.json())
             .then((result) => {
                 setIndications(result.indications)
@@ -148,7 +148,7 @@ const Indications = () => {
                         <table>
                             <tbody>
                             {indications.map(item => {
-                                if (item.id_persons.toLowerCase().includes(searchAuthor)) {
+                                if (item.id_persons === searchAuthor) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>

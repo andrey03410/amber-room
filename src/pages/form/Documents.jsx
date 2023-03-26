@@ -123,7 +123,7 @@ const Documents = () => {
     }
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/06582d7b-c765-4529-bd86-37107d13a986")
+        fetch("http://127.0.0.1:5000/getDocument")
             .then(res => res.json())
             .then((result) => {
                 setDocument(result.document)
@@ -239,7 +239,7 @@ const Documents = () => {
                             <tbody>
 
                             {document.map(item => {
-                                if (item.id_type_doc.toLowerCase().includes(searchName.toLowerCase())) {
+                                if (item.id_type_doc === searchName) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>

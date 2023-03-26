@@ -13,7 +13,7 @@ const Finds = () => {
     const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/0675be50-5496-41fb-b182-d9f435e5c241")
+        fetch("http://127.0.0.1:5000/getFinds")
             .then(res => res.json())
             .then((result) => {
                 setFind(result.find)
@@ -88,6 +88,7 @@ const Finds = () => {
                                 <tr>
                                     <th>id находки</th>
                                     <th>Название</th>
+                                    <th>Дата создания</th>
                                     <th>Номер попытки поиска</th>
                                     <th>Описание</th>
                                 </tr>
@@ -97,11 +98,12 @@ const Finds = () => {
                         <table>
                             <tbody>
                             {find.map(item => {
-                                if (item.name.toLowerCase().includes(searchSearchAtt)) {
+                                if (item.id_search_attempts === searchSearchAtt) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
+                                    <td>{item.date}</td>
                                     <td>{item.id_search_attempts}</td>
                                     <td>{item.description}</td>
                                         </tr>

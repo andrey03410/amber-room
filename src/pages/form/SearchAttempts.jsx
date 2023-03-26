@@ -16,7 +16,7 @@ const SearchAttempts = () => {
     const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/1a2e2b8c-1311-4251-b99e-68e8df57062c")
+        fetch("http://127.0.0.1:5000/getSearchAtt")
             .then(res => res.json())
             .then((result) => {
 
@@ -105,7 +105,7 @@ const SearchAttempts = () => {
                             <table>
                                 <tbody>
                                 {search_attempts.map(item => {
-                                if (item.id_versions.toLowerCase().includes(searchVersion)) {
+                                if (item.id_versions === searchVersion) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>

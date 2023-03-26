@@ -62,7 +62,7 @@ const Researches = () => {
         }, [])
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/6f9278ec-35f5-4e5c-938e-81830b57de35")
+        fetch("http://127.0.0.1:5000/getResearch")
             .then(res => res.json())
             .then((result) => {
                 setResearch(result.research)
@@ -155,7 +155,7 @@ const Researches = () => {
                         <table>
                             <tbody>
                             {research.map(item => {
-                                if (item.id_type_research.toLowerCase().includes(searchTypeRes)) {
+                                if (item.id_type_research === searchTypeRes) {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>
