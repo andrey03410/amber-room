@@ -54,7 +54,7 @@ const Researches = () => {
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.search_attempts.map((item, index) => {
+                    result.search_attempts.map((item) => {
                         array.push({value: item.id, label: item.date_start})
                     })
                     setSearchAttList(array)
@@ -161,20 +161,19 @@ const Researches = () => {
                                         <tr>
                                             <td>{item.id}</td>
                                             <td>{item.id_organization}</td>
-                                        {orgList.map(org => {
-                                            if (org.value === item.id_organization) {
-                                                return (
+                            {orgList.map(org => {
+                                if (org.value === item.id_organization) {
+                                    return (
 
-                                                <td>{item.id_organization}</td>
+                                            <td>{org.label}</td>
 
-                                                )
-                                            }
-                                        })}
-
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.id_type_research}</td>
-                                    <td>{item.local_place}</td>
+                                    )
+                                }
+                            })}
+                                            <td>{item.id_search_attempts}</td>
+                                            <td>{item.description}</td>
+                                            <td>{item.id_type_research}</td>
+                                            <td>{item.local_place}</td>
                                         </tr>
                                     )
                                 }
