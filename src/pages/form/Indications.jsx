@@ -20,12 +20,12 @@ const Indications = () => {
     const [selectLoadingDocs, setSelectLoadingDocs] = useState(true)
 
         useEffect(() => {
-            fetch("https://run.mocky.io/v3/8a8895a4-d564-4806-9fd7-b8e97bc633ba")
+            fetch("http://127.0.0.1:5000/getVersions")
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.versionList.map((item, index) => {
-                        array.push({value: index + 1, label: item})
+                    result.versions.map((item) => {
+                        array.push({value: item.id, label: item.description})
                     })
                     setVersionList(array)
                     setSelectLoading(false)
@@ -33,12 +33,12 @@ const Indications = () => {
         }, [])
 
         useEffect(() => {
-            fetch("https://run.mocky.io/v3/d23e90dc-0ac2-4506-929b-e5b9e234b28e")
+            fetch("http://127.0.0.1:5000/getDocument")
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.docList.map((item, index) => {
-                        array.push({value: index + 1, label: item})
+                    result.document.map((item) => {
+                        array.push({value: item.id, label: item.description})
                     })
                     setDocList(array)
                     setSelectLoadingDocs(false)
@@ -54,12 +54,12 @@ const Indications = () => {
             })
     }, [])
         useEffect(() => {
-            fetch("https://run.mocky.io/v3/91aaa078-7bd7-40c1-a998-ada5367fec2d")
+            fetch("http://127.0.0.1:5000/getPersons")
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.personList.map((item, index) => {
-                        array.push({value: index + 1, label: item})
+                    result.persons.map((item) => {
+                        array.push({value: item.id, label: item.name})
                     })
                     setPersonList(array)
                     setSelectLoadingPers(false)

@@ -25,12 +25,12 @@ const SearchAttempts = () => {
     }, [])
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/8a8895a4-d564-4806-9fd7-b8e97bc633ba")
+        fetch("http://127.0.0.1:5000/getVersions")
             .then(res => res.json())
             .then((result) => {
                 let array = []
-                result.versionList.map((item, index) => {
-                    array.push({value: index + 1, label: item})
+                result.versions.map((item) => {
+                    array.push({value: item.id, label: item.description})
                 })
                 setVersionList(array)
                 setSelectLoading(false)

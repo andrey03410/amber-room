@@ -23,12 +23,12 @@ const Researches = () => {
     const [selectLoadingTypeRes, setSelectLoadingTypeRes] = useState(true)
 
         useEffect(() => {
-            fetch("https://run.mocky.io/v3/bd0a2a47-853a-4874-9fdb-ccbb439001c1")
+            fetch("http://127.0.0.1:5000/getOrganisation")
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.orgList.map((item, index) => {
-                        array.push({value: index + 1, label: item})
+                    result.organisation.map((item) => {
+                        array.push({value: item.id, label: item.organisation})
                     })
                     setOrgList(array)
                     setSelectLoadingOrg(false)
@@ -36,12 +36,12 @@ const Researches = () => {
         }, [])
 
         useEffect(() => {
-            fetch("https://run.mocky.io/v3/39fb8321-4ba7-40f9-bde4-df8b9f1f1a73")
+            fetch("http://127.0.0.1:5000/getTypeResearch")
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.typeResList.map((item, index) => {
-                        array.push({value: index + 1, label: item})
+                    result.type_research.map((item) => {
+                        array.push({value: item.id, label: item.type})
                     })
                     setTypeResList(array)
                     setSelectLoadingTypeRes(false)
@@ -49,12 +49,12 @@ const Researches = () => {
         }, [])
 
         useEffect(() => {
-            fetch("https://run.mocky.io/v3/6fb4f175-3709-427a-aa28-c4f56d7f0baf")
+            fetch("http://127.0.0.1:5000/getSearchAtt")
                 .then(res => res.json())
                 .then((result) => {
                     let array = []
-                    result.searchAttList.map((item, index) => {
-                        array.push({value: index + 1, label: item})
+                    result.search_attempts.map((item, index) => {
+                        array.push({value: item.id, label: item.date_start})
                     })
                     setSearchAttList(array)
                     setSelectLoadingSearchAtt(false)

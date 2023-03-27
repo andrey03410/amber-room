@@ -21,12 +21,12 @@ const Finds = () => {
     }, [])
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/6fb4f175-3709-427a-aa28-c4f56d7f0baf")
+        fetch("http://127.0.0.1:5000/getSearchAtt")
             .then(res => res.json())
             .then((result) => {
                 let array = []
-                result.searchAttList.map((item, index) => {
-                    array.push({value: index + 1, label: item})
+                result.search_attempts.map((item) => {
+                    array.push({value: item.id, label: item.date_start})
                 })
                 setSearchAttList(array)
                 setSelectLoading(false)

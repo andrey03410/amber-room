@@ -23,12 +23,12 @@ const Versions = () => {
 
 
     useEffect(() => {
-                fetch("https://run.mocky.io/v3/2ffe96d6-7249-424c-84f8-25810987f05e")
+                fetch("http://127.0.0.1:5000/getPlaces")
                     .then(res => res.json())
                     .then((result) => {
                         let array = []
-                        result.placeList.map((item, index) => {
-                            array.push({value: index + 1, label: item})
+                        result.places.map((item) => {
+                            array.push({value: item.id, label: item.name})
                         })
                         setPlaceList(array)
                         setSelectLoading(false)
