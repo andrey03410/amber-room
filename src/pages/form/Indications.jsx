@@ -152,9 +152,27 @@ const Indications = () => {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>
-                                    <td>{item.id_persons}</td>
+                            {personList.map(prsn => {
+                                if (prsn.value === item.id_persons) {
+                                    return (
+
+                                    <td>{prsn.label}</td>
+
+                                    )
+                                }
+                            })}
+
                                     <td>{item.testimony}</td>
-                                    <td>{item.id_versions}</td>
+                            {versionList.map(vrsn => {
+                                if (vrsn.value === item.id_versions) {
+                                    return (
+
+                                    <td>{vrsn.label}</td>
+
+                                    )
+                                }
+                            })}
+
                                     <td>{item.date}</td>
                                         </tr>
                                     )

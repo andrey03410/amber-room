@@ -32,6 +32,7 @@ const Researches = () => {
                     })
                     setOrgList(array)
                     setSelectLoadingOrg(false)
+                    //console.log(array)
                 })
         }, [])
 
@@ -158,8 +159,18 @@ const Researches = () => {
                                 if (item.id_type_research === searchTypeRes) {
                                     return (
                                         <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_organization}</td>
+                                            <td>{item.id}</td>
+                                            <td>{item.id_organization}</td>
+                                        {orgList.map(org => {
+                                            if (org.value === item.id_organization) {
+                                                return (
+
+                                                <td>{item.id_organization}</td>
+
+                                                )
+                                            }
+                                        })}
+
                                     <td>{item.id_search_attempts}</td>
                                     <td>{item.description}</td>
                                     <td>{item.id_type_research}</td>

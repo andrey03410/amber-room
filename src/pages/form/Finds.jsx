@@ -104,7 +104,16 @@ const Finds = () => {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.date}</td>
-                                    <td>{item.id_search_attempts}</td>
+                            {searchAttList.map(srch => {
+                                if (srch.value === item.id_search_attempts) {
+                                    return (
+
+                                    <td>{srch.label}</td>
+
+                                    )
+                                }
+                            })}
+
                                     <td>{item.description}</td>
                                         </tr>
                                     )

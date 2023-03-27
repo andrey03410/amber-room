@@ -102,7 +102,15 @@ const Versions = () => {
                                     return (
                                         <tr>
                                         <td>{item.id}</td>
-                                        <td>{item.id_places}</td>
+                            {placeList.map(plc => {
+                                if (plc.value === item.id_places) {
+                                    return (
+                                        <td>{plc.label}</td>
+
+                                    )
+                                }
+                            })}
+
                                         <td>{item.description}</td>
                                         </tr>
                                     )

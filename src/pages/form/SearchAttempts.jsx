@@ -109,7 +109,17 @@ const SearchAttempts = () => {
                                     return (
                                         <tr>
                                     <td>{item.id}</td>
-                                    <td>{item.id_versions}</td>
+                                {versionList.map(vrs => {
+                                if (vrs.value === item.id_versions) {
+                                    return (
+
+                                    <td>{vrs.label}</td>
+
+
+                                    )
+                                }
+                            })}
+
                                     <td>{item.date_start}</td>
                                     <td>{item.date_finish}</td>
                                         </tr>

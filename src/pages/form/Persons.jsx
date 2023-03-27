@@ -27,12 +27,14 @@ const Persons = () => {
             .then(res => res.json())
             .then((result) => {
                 let array = []
-                //console.log(result.nationality)
+
                 result.nationality.map((item) => {
                     array.push({value: item.id, label: item.nationality})
                 })
                 setNationalityList(array)
                 setSelectLoading(false)
+
+                console.log(nationalityList)
 
 
             })
@@ -114,16 +116,29 @@ const Persons = () => {
                             {persons.map(item => {
                                 if (item.name.toLowerCase().includes(searchName.toLowerCase())) {
                                     return (
+
                                         <tr>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
-                                            <td>{item.id_nationality}</td>
+                                            {nationalityList.map(nat => {
+                                        if (nat.value === item.id_nationality) {
+
+                                            return (
+
+                                                    <td>{nat.label}</td>
+
+                                            )
+                                        }
+                                    })}
+
                                             <td>{item.description}</td>
                                         </tr>
                                     )
                                 }
                             })}
+
                             </tbody>
+
                         </table>
                     </div>
                 </div>
