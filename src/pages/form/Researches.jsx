@@ -160,19 +160,45 @@ const Researches = () => {
                                     return (
                                         <tr>
                                             <td>{item.id}</td>
-                                            <td>{item.id_organization}</td>
+
+
+
                             {orgList.map(org => {
-                                if (org.value === item.id_organization) {
+
+                                 if (org.value == item.id_organization) {
                                     return (
-
                                             <td>{org.label}</td>
-
                                     )
+
                                 }
+
                             })}
-                                            <td>{item.id_search_attempts}</td>
+                            {searchAttList.map(srch => {
+
+                                 if (srch.value == item.id_search_attempts) {
+                                    return (
+                                            <td>{srch.label}</td>
+                                    )
+
+                                }
+
+                            })}
+
+
+
+
                                             <td>{item.description}</td>
-                                            <td>{item.id_type_research}</td>
+                            {typeResList.map(tprs => {
+
+                                 if (tprs.value == item.id_type_research) {
+                                    return (
+                                            <td>{tprs.label}</td>
+                                    )
+
+                                }
+
+                            })}
+
                                             <td>{item.local_place}</td>
                                         </tr>
                                     )
