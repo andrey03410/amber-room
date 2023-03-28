@@ -19,7 +19,6 @@ const SearchAttempts = () => {
         fetch("http://127.0.0.1:5000/getSearchAtt")
             .then(res => res.json())
             .then((result) => {
-
                 setSearchAt(result.search_attempts)
             })
     }, [])
@@ -46,7 +45,7 @@ const SearchAttempts = () => {
         }
         fetch("test.com", request)
             .then(response => {
-            if (response.status === 200) {
+                if (response.status === 200) {
                     toast.success("Попытка поиска успешно добавлена")
                 } else {
                     toast.error("Ошибка добавления попытки поиска")
@@ -55,86 +54,87 @@ const SearchAttempts = () => {
     }
 
 
-
     return (
         <div className={"forms_wrapper"}>
-                <form className="form_wrapper" onSubmit={submit}>
+            <form className="form_wrapper" onSubmit={submit}>
                 <span className={"title_form"}>Добавить попытку поиска</span>
-                    <div>
-                        <p className={"title_field"}>* ID версии</p>
+                <div>
+                    <p className={"title_field"}>* ID версии</p>
 
                     <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
                             onChange={(newValue) => {
                                 setIdVersion(newValue.value)
                             }}/>
-                    </div>
-                    <div>
-                        <p className={"title_field"}>Дата начала</p>
-                        <input type="date" className="form_input" onChange={(event) => {setDateStart(event.target.value)}}/>
-                    </div>
-                    <div>
-                        <p className={"title_field"}>Дата окончания</p>
-                        <input type="date" className="form_input" onChange={(event) => {setDateFinish(event.target.value)}}/>
-                    </div>
-                    <button className={"submit_button"}>Отправить</button>
-                </form>
+                </div>
+                <div>
+                    <p className={"title_field"}>Дата начала</p>
+                    <input type="date" className="form_input" onChange={(event) => {
+                        setDateStart(event.target.value)
+                    }}/>
+                </div>
+                <div>
+                    <p className={"title_field"}>Дата окончания</p>
+                    <input type="date" className="form_input" onChange={(event) => {
+                        setDateFinish(event.target.value)
+                    }}/>
+                </div>
+                <button className={"submit_button"}>Отправить</button>
+            </form>
 
-                <div className="form_wrapper">
-            <span className={"title_form"}>Найти попытку поиска</span>
-                    <div>
-                        <p className={"title_field"}>* Версия</p>
+            <div className="form_wrapper">
+                <span className={"title_form"}>Найти попытку поиска</span>
+                <div>
+                    <p className={"title_field"}>* Версия</p>
                     <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
                             onChange={(newValue) => {
                                 setSearchVersion(newValue.value)
                             }}/>
-                    </div>
+                </div>
                 <p className={"title_field"}>Результаты поиска</p>
 
-                    <div className="scroll-table">
+                <div className="scroll-table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>id попытки поиска</th>
+                            <th>id версии</th>
+                            <th>Дата начала</th>
+                            <th>Дата конца</th>
+                        </tr>
+                        </thead>
+                    </table>
+                    <div className="scroll-table-body">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>id попытки поиска</th>
-                                    <th>id версии</th>
-                                    <th>Дата начала</th>
-                                    <th>Дата конца</th>
-                                </tr>
-                            </thead>
-                        </table>
-                        <div className="scroll-table-body">
-                            <table>
-                                <tbody>
-                                {search_attempts.map(item => {
+                            <tbody>
+                            {search_attempts.map(item => {
                                 if (item.id_versions === searchVersion) {
                                     return (
                                         <tr>
-                                    <td>{item.id}</td>
-                                {versionList.map(vrs => {
-                                if (vrs.value === item.id_versions) {
-                                    return (
+                                            <td>{item.id}</td>
+                                            {versionList.map(vrs => {
+                                                if (vrs.value === item.id_versions) {
+                                                    return (
 
-                                    <td>{vrs.label}</td>
+                                                        <td>{vrs.label}</td>
 
 
-                                    )
-                                }
-                            })}
+                                                    )
+                                                }
+                                            })}
 
-                                    <td>{item.date_start}</td>
-                                    <td>{item.date_finish}</td>
+                                            <td>{item.date_start}</td>
+                                            <td>{item.date_finish}</td>
                                         </tr>
                                     )
                                 }
                             })}
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-
-
+        </div>
 
 
     );

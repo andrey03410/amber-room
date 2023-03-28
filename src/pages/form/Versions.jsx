@@ -21,19 +21,18 @@ const Versions = () => {
     }, [])
 
 
-
     useEffect(() => {
-                fetch("http://127.0.0.1:5000/getPlaces")
-                    .then(res => res.json())
-                    .then((result) => {
-                        let array = []
-                        result.places.map((item) => {
-                            array.push({value: item.id, label: item.name})
-                        })
-                        setPlaceList(array)
-                        setSelectLoading(false)
-                    })
-            }, [])
+        fetch("http://127.0.0.1:5000/getPlaces")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.places.map((item) => {
+                    array.push({value: item.id, label: item.name})
+                })
+                setPlaceList(array)
+                setSelectLoading(false)
+            })
+    }, [])
 
 
     const submit = (event) => {
@@ -45,7 +44,7 @@ const Versions = () => {
         }
         fetch("test.com", request)
             .then(response => {
-            if (response.status === 200) {
+                if (response.status === 200) {
                     toast.success("Версия успешно добавлена")
                 } else {
                     toast.error("Ошибка добавления версии")
@@ -68,29 +67,31 @@ const Versions = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Описание</p>
-                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setDescription(event.target.value)
+                    }}/>
                 </div>
                 <button className={"submit_button"}>Отправить</button>
             </form>
             <div className="form_wrapper">
-            <span className={"title_form"}>Найти версию</span>
-                                <div>
-                                    <p className={"title_field"}>* Место</p>
+                <span className={"title_form"}>Найти версию</span>
+                <div>
+                    <p className={"title_field"}>* Место</p>
 
                     <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
                             onChange={(newValue) => {
                                 setSearchPlaceName(newValue.value)
                             }}/>
-                                </div>
+                </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>id версии</th>
-                                <th>id места</th>
-                                <th>Описание</th>
-                            </tr>
+                        <tr>
+                            <th>id версии</th>
+                            <th>id места</th>
+                            <th>Описание</th>
+                        </tr>
                         </thead>
                     </table>
                     <div className="scroll-table-body">
@@ -101,17 +102,17 @@ const Versions = () => {
                                 if (item.id_places === searchPlaceName) {
                                     return (
                                         <tr>
-                                        <td>{item.id}</td>
-                            {placeList.map(plc => {
-                                if (plc.value === item.id_places) {
-                                    return (
-                                        <td>{plc.label}</td>
+                                            <td>{item.id}</td>
+                                            {placeList.map(plc => {
+                                                if (plc.value === item.id_places) {
+                                                    return (
+                                                        <td>{plc.label}</td>
 
-                                    )
-                                }
-                            })}
+                                                    )
+                                                }
+                                            })}
 
-                                        <td>{item.description}</td>
+                                            <td>{item.description}</td>
                                         </tr>
                                     )
                                 }

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import Select from "react-select";
 
 const Documents = () => {
-    const [document, setDocument] = useState([])
+    const [documents, setDocuments] = useState([])
     const [searchAttList, setSearchAttList] = useState([])
     const [typeDocList, setTypeDocList] = useState([])
     const [personList, setPersonList] = useState([])
@@ -39,8 +39,6 @@ const Documents = () => {
     }, [])
 
 
-
-
     useEffect(() => {
         fetch("http://127.0.0.1:5000/getSearchAtt")
             .then(res => res.json())
@@ -68,6 +66,26 @@ const Documents = () => {
             })
     }, [])
 
+    const searchDoc = (id_person) => {
+        let request = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({id_person})
+        }
+        fetch("http://127.0.0.1:5000/findDoc", request)
+            .then(response => {
+                if (response.status === 200) {
+                    toast.success("Документы найдены")
+                } else {
+                    toast.error("Документы не найдены")
+                }
+                return response.json()
+            })
+            .then(result => {
+                setDocuments(result.documents)
+            })
+    }
+
     const submit = (event) => {
         event.preventDefault()
         let formData = new FormData()
@@ -87,7 +105,7 @@ const Documents = () => {
         }
         fetch("test.com", request)
             .then(response => {
-            if (response.status === 200) {
+                if (response.status === 200) {
                     toast.success("Документ успешно добавлен")
                 } else {
                     toast.error("Ошибка добавления документа")
@@ -108,42 +126,36 @@ const Documents = () => {
         event.preventDefault()
         setImageDesc(prevState => {
             let array = [...prevState]
-            if(array.length > 1){
+            if (array.length > 1) {
                 array.pop()
             }
             return array
         })
         setImages(prevState => {
             let array = [...prevState]
-            if(array.length > 1){
+            if (array.length > 1) {
                 array.pop()
             }
             return array
         })
     }
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getDocument")
-            .then(res => res.json())
-            .then((result) => {
-                setDocument(result.document)
-            })
-    }, [])
     return (
         <div className={"forms_wrapper"}>
-            <form className="form_wrapper"  onSubmit={submit}>
+            <form className="form_wrapper" onSubmit={submit}>
                 <span className={"title_form"}>Добавить документ</span>
                 <div>
                     <p className={"title_field"}>* Тип документа</p>
 
-                    <Select options={typeDocList} isLoading={selectLoadingTypeDoc} placeholder={"Выберите тип документа"}
+                    <Select options={typeDocList} isLoading={selectLoadingTypeDoc}
+                            placeholder={"Выберите тип документа"}
                             onChange={(newValue) => {
                                 setIdTypeDoc(newValue.value)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Попытка поиска</p>
-                    <Select options={searchAttList} isLoading={selectLoadingSearchAtt} placeholder={"Выберите попытку поиска"}
+                    <Select options={searchAttList} isLoading={selectLoadingSearchAtt}
+                            placeholder={"Выберите попытку поиска"}
                             onChange={(newValue) => {
                                 setIdSearchAtt(newValue.value)
                             }}/>
@@ -151,25 +163,29 @@ const Documents = () => {
 
                 <div>
                     <p className={"title_field"}>Дата </p>
-                    <input className="form_input" onChange={(event) => {setDate(event.target.value)}}/>
+                    <input className="form_input" onChange={(event) => {
+                        setDate(event.target.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Описание </p>
-                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setDescription(event.target.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить автора(ов)</p>
                     <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setAuthor(newValue.value)
-                    }}/>
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>
                     <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setPerson(newValue.value)
-                    }}/>
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить фото </p>
@@ -215,41 +231,40 @@ const Documents = () => {
             </form>
             <div className="form_wrapper">
                 <span className={"title_form"}>Найти документ</span>
-                    <div>
-                        <p className={"title_field"}>* ФИО персоны, которая упоминается в документе</p>
-                    <input className="form_input" onChange={(event) => {
-                        setSearchName(event.target.value)
-                    }}/>
-                    </div>
+                <div>
+                    <p className={"title_field"}>* ФИО персоны, которая упоминается в документе</p>
+                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персону"}
+                            onChange={(newValue) => {
+                                searchDoc(newValue.value)
+                            }}/>
+                </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>id места</th>
-                                <th>id тип документа</th>
-                                <th>id попытки поиска</th>
-                                <th>Дата</th>
-                                <th>Описание</th>
-                            </tr>
+                        <tr>
+                            <th>id места</th>
+                            <th>id тип документа</th>
+                            <th>id попытки поиска</th>
+                            <th>Дата</th>
+                            <th>Описание</th>
+                        </tr>
                         </thead>
                     </table>
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
+                            {documents.map(item => {
+                                return (
+                                    <tr>
+                                        <td>{item.id}</td>
+                                        <td>{item.id_type_doc}</td>
+                                        <td>{item.id_search_attempts}</td>
+                                        <td>{item.date}</td>
+                                        <td>{item.description}</td>
+                                    </tr>
+                                )
 
-                            {document.map(item => {
-                                if (item.id_type_doc === searchName) {
-                                    return (
-                                        <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.id_type_doc}</td>
-                                    <td>{item.id_search_attempts}</td>
-                                    <td>{item.date}</td>
-                                    <td>{item.description}</td>
-                                        </tr>
-                                    )
-                                }
                             })}
 
                             </tbody>
