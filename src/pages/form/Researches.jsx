@@ -149,6 +149,7 @@ const Researches = () => {
                                 <th>Описание</th>
                                 <th>Тип исследования</th>
                                 <th>Локальное место</th>
+                                <th>Техника</th>
                             </tr>
                         </thead>
                     </table>
@@ -200,6 +201,7 @@ const Researches = () => {
                             })}
 
                                             <td>{item.local_place}</td>
+                                            <td>{item.tecnique}</td>
                                         </tr>
                                     )
                                 }

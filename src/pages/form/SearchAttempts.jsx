@@ -11,6 +11,7 @@ const SearchAttempts = () => {
 
     const [id_versions, setIdVersion] = useState("test name")
     const [date_start, setDateStart] = useState("date1")
+    const [description, setDescription] = useState("test desc")
 
     const [date_finish, setDateFinish] = useState("date2")
     const [selectLoading, setSelectLoading] = useState(true)
@@ -78,6 +79,12 @@ const SearchAttempts = () => {
                         setDateFinish(event.target.value)
                     }}/>
                 </div>
+                <div>
+                    <p className={"title_field"}>Описание</p>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setDescription(event.target.value)
+                    }}/>
+                </div>
                 <button className={"submit_button"}>Отправить</button>
             </form>
 
@@ -100,6 +107,7 @@ const SearchAttempts = () => {
                             <th>id версии</th>
                             <th>Дата начала</th>
                             <th>Дата конца</th>
+                            <th>Описание</th>
                         </tr>
                         </thead>
                     </table>
@@ -124,6 +132,7 @@ const SearchAttempts = () => {
 
                                             <td>{item.date_start}</td>
                                             <td>{item.date_finish}</td>
+                                            <td>{item.description}</td>
                                         </tr>
                                     )
                                 }

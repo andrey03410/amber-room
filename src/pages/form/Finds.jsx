@@ -58,10 +58,7 @@ const Finds = () => {
                         <p className={"title_field"}>* Название находки</p>
                         <input className="form_input" onChange={(event) => {setName(event.target.value)}}/>
                     </div>
-                    <div>
-                        <p className={"title_field"}>* Описание</p>
-                        <input className="form_input" onChange={(event) => {setDescription(event.target.value)}}/>
-                    </div>
+
                     <div>
                         <p className={"title_field"}>* ID попытки поиска</p>
 
@@ -69,6 +66,10 @@ const Finds = () => {
                             onChange={(newValue) => {
                                 setIdSearchAtt(newValue.value)
                             }}/>
+                    </div>
+                    <div>
+                        <p className={"title_field"}>* Описание</p>
+                        <textarea className="textarea_form"  onChange={(event) => {setDescription(event.target.value)}}/>
                     </div>
                     <button className={"submit_button"}>Отправить</button>
                 </form>
@@ -88,7 +89,6 @@ const Finds = () => {
                                 <tr>
                                     <th>id находки</th>
                                     <th>Название</th>
-                                    <th>Дата создания</th>
                                     <th>Номер попытки поиска</th>
                                     <th>Описание</th>
                                 </tr>
@@ -103,7 +103,6 @@ const Finds = () => {
                                         <tr>
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
-                                    <td>{item.date}</td>
                             {searchAttList.map(srch => {
                                 if (srch.value === item.id_search_attempts) {
                                     return (
