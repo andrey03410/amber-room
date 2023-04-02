@@ -34,7 +34,7 @@ const Persons = () => {
                 setNationalityList(array)
                 setSelectLoading(false)
 
-                console.log(nationalityList)
+                //console.log(nationalityList)
 
 
             })

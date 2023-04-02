@@ -77,7 +77,7 @@ const Researches = () => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({id_organization, id_search_attempts, description, id_type_research, local_place, technique})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addResearches", request)
             .then(response => {
             if (response.status === 200) {
                     toast.success("Исследование успешно добавлено")

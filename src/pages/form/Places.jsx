@@ -27,7 +27,7 @@ const Places = () => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({name, description})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addPlace", request)
             .then(response => {
             if (response.status === 200) {
                     toast.success("Место успешно добавлено")

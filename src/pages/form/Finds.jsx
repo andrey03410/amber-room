@@ -40,7 +40,7 @@ const Finds = () => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({name,id_search_attempts, description})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addFinds", request)
             .then(response => {
             if (response.status === 200) {
                     toast.success("Находка успешно добавлена")

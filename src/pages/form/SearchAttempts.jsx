@@ -42,9 +42,9 @@ const SearchAttempts = () => {
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({id_versions, date_start, date_finish})
+            body: JSON.stringify({id_versions, date_start, date_finish, description})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addSearchAttempt", request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Попытка поиска успешно добавлена")

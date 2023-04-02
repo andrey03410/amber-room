@@ -42,7 +42,7 @@ const Versions = () => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({id_places, description})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addVersion", request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Версия успешно добавлена")
