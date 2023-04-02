@@ -51,12 +51,15 @@ details[open] summary {
 .scroll-table-body {
     height: 300px;
     overflow-x: auto;
+    word-break: break-all;
+
 }
 
 .scroll-table table {
     width: 100%;
     table-layout: fixed;
     border: none;
+
 }
 
 .scroll-table thead th {
@@ -69,6 +72,8 @@ details[open] summary {
     font-size: 14px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    word-break: break-all;
+
 }
 
 .scroll-table tbody td {
@@ -135,6 +140,7 @@ details[open] summary {
     box-sizing: border-box;
     border-radius: 6px;
     padding: 0 6px;
+
 }
 
 /* Стили для скролла текстбокса*/
@@ -158,6 +164,7 @@ details[open] summary {
     box-sizing: border-box;
     border-radius: 6px;
     margin-top: 6px;
+
 
 
 }
