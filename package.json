@@ -12,7 +12,8 @@
     "react-router-dom": "^6.0.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "react-photo-view": "^1.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
