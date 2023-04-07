@@ -13,37 +13,37 @@ const Indications = () => {
     const [testimony, setTestimony] = useState("test desc")
     const [id_versions, setIdVersions] = useState("test desc")
     const [date, setDate] = useState("test date")
-    const [idDoc, setIdDoc] = useState("test date")
+    const [documentSelectValue, setDocumentSelectValue] = useState({id_doc: ""})
 
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
     const [selectLoading, setSelectLoading] = useState(true)
     const [selectLoadingDocs, setSelectLoadingDocs] = useState(true)
 
-        useEffect(() => {
-            fetch("http://127.0.0.1:5000/getVersions")
-                .then(res => res.json())
-                .then((result) => {
-                    let array = []
-                    result.versions.map((item) => {
-                        array.push({value: item.id, label: item.description})
-                    })
-                    setVersionList(array)
-                    setSelectLoading(false)
+    useEffect(() => {
+        fetch("http://127.0.0.1:5000/getVersions")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.versions.map((item) => {
+                    array.push({value: item.id, label: item.description})
                 })
-        }, [])
+                setVersionList(array)
+                setSelectLoading(false)
+            })
+    }, [])
 
-        useEffect(() => {
-            fetch("http://127.0.0.1:5000/getDocument")
-                .then(res => res.json())
-                .then((result) => {
-                    let array = []
-                    result.document.map((item) => {
-                        array.push({value: item.id, label: item.description})
-                    })
-                    setDocList(array)
-                    setSelectLoadingDocs(false)
+    useEffect(() => {
+        fetch("http://127.0.0.1:5000/getDocument")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.document.map((item) => {
+                    array.push({value: item.id, label: item.description})
                 })
-        }, [])
+                setDocList(array)
+                setSelectLoadingDocs(false)
+            })
+    }, [])
 
 
     useEffect(() => {
@@ -53,39 +53,40 @@ const Indications = () => {
                 setIndications(result.indications)
             })
     }, [])
-        useEffect(() => {
-            fetch("http://127.0.0.1:5000/getPersons")
-                .then(res => res.json())
-                .then((result) => {
-                    let array = []
-                    result.persons.map((item) => {
-                        array.push({value: item.id, label: item.name})
-                    })
-                    setPersonList(array)
-                    setSelectLoadingPers(false)
+    useEffect(() => {
+        fetch("http://127.0.0.1:5000/getPersons")
+            .then(res => res.json())
+            .then((result) => {
+                let array = []
+                result.persons.map((item) => {
+                    array.push({value: item.id, label: item.name})
                 })
-        }, [])
+                setPersonList(array)
+                setSelectLoadingPers(false)
+            })
+    }, [])
 
 
     const submit = (event) => {
         event.preventDefault()
+        let id_documents = []
+        documentSelectValue.map((item) => {
+            id_documents.push(item.value)
+        })
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({id_persons, testimony, id_versions, date, idDoc})
+            body: JSON.stringify({id_persons, testimony, id_versions, date, id_documents})
         }
         fetch("test.com", request)
             .then(response => {
-            if (response.status === 200) {
+                if (response.status === 200) {
                     toast.success("Показание успешно добавлено")
                 } else {
                     toast.error("Ошибка добавления показания")
                 }
             })
     }
-
-
-
     return (
         <div className={"forms_wrapper"}>
             <form className="form_wrapper" onSubmit={submit}>
@@ -95,11 +96,13 @@ const Indications = () => {
                     <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setIdPersons(newValue.value)
-                    }}/>
+                            }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Показание </p>
-                    <textarea className="textarea_form" onChange={(event) => {setTestimony(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setTestimony(event.target.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>* Версия</p>
@@ -111,37 +114,39 @@ const Indications = () => {
 
                 <div>
                     <p className={"title_field"}>Дата </p>
-                    <input className="form_input" onChange={(event) => {setDate(event.target.value)}}/>
+                    <input className="form_input" onChange={(event) => {
+                        setDate(event.target.value)
+                    }}/>
                 </div>
                 <p className={"title_field"}>Документы, с которыми связаны показания</p>
-                    <Select options={docList} isLoading={selectLoading} isMulti placeholder={"Выберите документ(ы)"}
-                            onChange={(newValue) => {
-                                setIdDoc(newValue.value)
-                            }}/>
+                <Select options={docList} isLoading={selectLoading} isMulti placeholder={"Выберите документ(ы)"}
+                        onChange={(newValue) => {
+                            setDocumentSelectValue(newValue)
+                        }}/>
 
 
                 <button className={"submit_button"}>Отправить</button>
             </form>
             <div className="form_wrapper">
                 <span className={"title_form"}>Найти показание</span>
-                        <div>
-                            <p className={"title_field"}>* ФИО автора</p>
+                <div>
+                    <p className={"title_field"}>* ФИО автора</p>
                     <Select options={personList} isLoading={selectLoading} placeholder={"Выберите ФИО автора"}
                             onChange={(newValue) => {
                                 setSearchAuthor(newValue.value)
                             }}/>
-                        </div>
+                </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>id показания</th>
-                                <th>id персоны</th>
-                                <th>Показание</th>
-                                <th>id версии</th>
-                                <th>Дата</th>
-                            </tr>
+                        <tr>
+                            <th>id показания</th>
+                            <th>id персоны</th>
+                            <th>Показание</th>
+                            <th>id версии</th>
+                            <th>Дата</th>
+                        </tr>
                         </thead>
                     </table>
                     <div className="scroll-table-body">
@@ -151,34 +156,33 @@ const Indications = () => {
                                 if (item.id_persons === searchAuthor) {
                                     return (
                                         <tr>
-                                    <td>{item.id}</td>
-                            {personList.map(prsn => {
-                                if (prsn.value === item.id_persons) {
-                                    return (
+                                            <td>{item.id}</td>
+                                            {personList.map(prsn => {
+                                                if (prsn.value === item.id_persons) {
+                                                    return (
 
-                                    <td>{prsn.label}</td>
+                                                        <td>{prsn.label}</td>
 
-                                    )
-                                }
-                            })}
+                                                    )
+                                                }
+                                            })}
 
-                                    <td>{item.testimony}</td>
-                            {versionList.map(vrsn => {
-                                if (vrsn.value === item.id_versions) {
-                                    return (
+                                            <td>{item.testimony}</td>
+                                            {versionList.map(vrsn => {
+                                                if (vrsn.value === item.id_versions) {
+                                                    return (
 
-                                    <td>{vrsn.label}</td>
+                                                        <td>{vrsn.label}</td>
 
-                                    )
-                                }
-                            })}
+                                                    )
+                                                }
+                                            })}
 
-                                    <td>{item.date}</td>
+                                            <td>{item.date}</td>
                                         </tr>
                                     )
                                 }
                             })}
-
                             </tbody>
                         </table>
                     </div>
