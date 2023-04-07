@@ -60,6 +60,7 @@ details[open] summary {
     table-layout: fixed;
     border: none;
 
+
 }
 
 .scroll-table thead th {
@@ -73,6 +74,8 @@ details[open] summary {
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
     word-break: break-all;
+
+
 
 }
 
