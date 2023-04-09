@@ -266,7 +266,6 @@ const Documents = () => {
                                 )
 
                             })}
-
                             </tbody>
                         </table>
                     </div>
