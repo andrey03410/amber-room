@@ -224,8 +224,8 @@ const Documents = () => {
                     ))}
                 </div>
                 <div>
-                    <button onClick={addButtonImage}>Добавить ячейку</button>
-                    <button onClick={delButtonImage}>Удалить ячейку</button>
+                    <button className={"add_image_button"} onClick={addButtonImage}>Добавить ячейку</button>
+                    <button className={"del_image_button"} onClick={delButtonImage}>Удалить ячейку</button>
                 </div>
                 <button className={"submit_button"}>Отправить</button>
             </form>
@@ -264,7 +264,6 @@ const Documents = () => {
                                         <td>{item.description}</td>
                                     </tr>
                                 )
-
                             })}
                             </tbody>
                         </table>

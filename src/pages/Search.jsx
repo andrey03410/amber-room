@@ -63,7 +63,6 @@ const Search = () => {
                 setSelectLoadingPers(false)
             })
     }, [])
-
     return (
         <div>
             <div className="form_wrapper_search">
@@ -103,12 +102,12 @@ const Search = () => {
                                         <td>
                                             <button value={item.id} onClick={(event) => {
                                                 loadImagesId(item.id)
+                                                console.log(id_images)
                                             }}>Загрузить
                                             </button>
                                         </td>
                                     </tr>
                                 )
-
                             })}
                             </tbody>
                         </table>
@@ -116,10 +115,10 @@ const Search = () => {
                 </div>
             </div>
             <h3>Просмотреть документы</h3>
-            <PhotoProvider bannerVisible={true}>
+            <PhotoProvider>
                 <div>
-                    {id_images.map((item, index) => (
-                        <PhotoView key={index} src={'http://localhost:5000/getImage' + item.toString()}>
+                    {id_images.map((item) => (
+                        <PhotoView key={item} src={'http://localhost:5000/getImage' + item.toString()}>
                             <img src={'http://localhost:5000/getImage' + item.toString()} alt={''}
                                  className='image_preview'/>
                         </PhotoView>

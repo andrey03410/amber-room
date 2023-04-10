@@ -159,12 +159,38 @@ details[open] summary {
 .submit_button {
     width: 100px;
     height: 30px;
-    background: #f6f5f5;
+    background: #ffffff;
     border: 1px solid #D3D9DE;
     box-sizing: border-box;
     border-radius: 6px;
     margin-top: 6px;
+}
 
+.add_image_button {
+    width: 150px;
+    height: 30px;
+    background: #ffffff;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-top: 6px;
+}
+.del_image_button {
+    width: 150px;
+    height: 30px;
+    background:#ffffff;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-top: 6px;
+}
 
-
+.select_image_button {
+    width: 150px;
+    height: 30px;
+    background: #ffffff;
+    border: 1px solid #D3D9DE;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-top: 6px;
 }
