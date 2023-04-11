@@ -6,7 +6,7 @@ import Select from "react-select";
 import toast from "react-hot-toast";
 
 const Search = () => {
-    const [id_images, setId_images] = useState([1, 2, 3])
+    const [images, setImages] = useState([{id_image: 1, description: "test"}])
     const [documents, setDocuments] = useState([])
     const [personList, setPersonList] = useState([])
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
@@ -37,7 +37,7 @@ const Search = () => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({id_document})
         }
-        fetch("http://127.0.0.1:5000/findImagesId", request)
+        fetch("http://127.0.0.1:5000/findImages", request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Фотографии найдены")
@@ -47,7 +47,7 @@ const Search = () => {
                 return response.json()
             })
             .then(result => {
-                setId_images(result.id_images)
+                setImages(result.images)
             })
     }
 
@@ -102,7 +102,7 @@ const Search = () => {
                                         <td>
                                             <button value={item.id} onClick={(event) => {
                                                 loadImagesId(item.id)
-                                                console.log(id_images)
+                                                console.log(images)
                                             }}>Загрузить
                                             </button>
                                         </td>
@@ -117,9 +117,9 @@ const Search = () => {
             <h3>Просмотреть документы</h3>
             <PhotoProvider>
                 <div>
-                    {id_images.map((item) => (
-                        <PhotoView key={item} src={'http://localhost:5000/getImage' + item.toString()}>
-                            <img src={'http://localhost:5000/getImage' + item.toString()} alt={''}
+                    {images.map((item) => (
+                        <PhotoView key={item.id_image} src={'http://localhost:5000/getImage' + item.id_image.toString()}>
+                            <img src={'http://localhost:5000/getImage' + item.id_image.toString()} alt={''}
                                  className='image_preview'/>
                         </PhotoView>
                     ))}
