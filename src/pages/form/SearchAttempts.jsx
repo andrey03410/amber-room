@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
 
-const SearchAttempts = () => {
-    const [search_attempts, setSearchAt] = useState([])
-    const [versionList, setVersionList] = useState([])
+const SearchAttempts = (props) => {
+    const [versionSelect, setVersionSelect] = useState([])
     const [dateList, setDateList] = useState([])
 
     const [searchVersion, setSearchVersion] = useState("")
@@ -17,25 +16,12 @@ const SearchAttempts = () => {
     const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getSearchAtt")
-            .then(res => res.json())
-            .then((result) => {
-                setSearchAt(result.search_attempts)
-            })
-    }, [])
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getVersions")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.versions.map((item) => {
-                    array.push({value: item.id, label: item.description})
-                })
-                setVersionList(array)
-                setSelectLoading(false)
-            })
-    }, [])
+        let array = []
+        props.versions.map((item) => {
+            array.push({value: item.id, label: item.description})
+        })
+        setVersionSelect(array)
+    }, [props.searchAttempts])
 
     const submit = (event) => {
         event.preventDefault()
@@ -53,8 +39,6 @@ const SearchAttempts = () => {
                 }
             })
     }
-
-
     return (
         <div className={"forms_wrapper"}>
             <form className="form_wrapper" onSubmit={submit}>
@@ -62,7 +46,7 @@ const SearchAttempts = () => {
                 <div>
                     <p className={"title_field"}>* ID версии</p>
 
-                    <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
+                    <Select options={versionSelect} isLoading={props.versionsLoading} placeholder={"Выберите версию"}
                             onChange={(newValue) => {
                                 setIdVersion(newValue.value)
                             }}/>
@@ -92,7 +76,7 @@ const SearchAttempts = () => {
                 <span className={"title_form"}>Найти попытку поиска</span>
                 <div>
                     <p className={"title_field"}>* Версия</p>
-                    <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
+                    <Select options={versionSelect} isLoading={props.versionsLoading} placeholder={"Выберите версию"}
                             onChange={(newValue) => {
                                 setSearchVersion(newValue.value)
                             }}/>
@@ -114,22 +98,18 @@ const SearchAttempts = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {search_attempts.map(item => {
+                            {props.searchAttempts.map(item => {
                                 if (item.id_versions === searchVersion) {
                                     return (
                                         <tr>
                                             <td>{item.id}</td>
-                                            {versionList.map(vrs => {
+                                            {versionSelect.map(vrs => {
                                                 if (vrs.value === item.id_versions) {
                                                     return (
-
                                                         <td>{vrs.label}</td>
-
-
                                                     )
                                                 }
                                             })}
-
                                             <td>{item.date_start}</td>
                                             <td>{item.date_finish}</td>
                                             <td>{item.description}</td>
@@ -137,7 +117,6 @@ const SearchAttempts = () => {
                                     )
                                 }
                             })}
-
                             </tbody>
                         </table>
                     </div>
