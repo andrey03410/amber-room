@@ -123,8 +123,6 @@ const SearchAttempts = (props) => {
                 </div>
             </div>
         </div>
-
-
     );
 };
 

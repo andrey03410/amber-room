@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
 
-const Documents = () => {
+const Documents = (props) => {
     const [documents, setDocuments] = useState([])
-    const [searchAttList, setSearchAttList] = useState([])
-    const [typeDocList, setTypeDocList] = useState([])
-    const [personList, setPersonList] = useState([])
+    const [searchAttemptsSelect, setSearchAttemptsSelect] = useState([])
+    const [typeDocSelect, setTypeDocSelect] = useState([])
+    const [personSelect, setPersonSelect] = useState([])
 
     const [person, setPerson] = useState("Иванов")
     const [author, setAuthor] = useState("Петров")
@@ -20,51 +20,30 @@ const Documents = () => {
     const [imageDesc, setImageDesc] = useState(["test"])
     const [images, setImages] = useState([null])
 
-    const [selectLoadingTypeDoc, setSelectLoadingTypeDoc] = useState(true)
-    const [selectLoadingPers, setSelectLoadingPers] = useState(true)
-    const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
-
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getTypeDoc")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.type_doc.map((item) => {
-                    array.push({value: item.id, label: item.type})
-                })
-                setTypeDocList(array)
-                setSelectLoadingTypeDoc(false)
-            })
-    }, [])
-
+        let array = []
+        props.persons.map((item) => {
+            array.push({value: item.id, label: item.name})
+        })
+        setPersonSelect(array)
+    }, [props.persons])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getSearchAtt")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.search_attempts.map((item) => {
-                    array.push({value: item.id, label: item.date_start})
-                })
-                setSearchAttList(array)
-                setSelectLoadingSearchAtt(false)
-            })
-    }, [])
-
+        let array = []
+        props.searchAttempts.map((item) => {
+            array.push({value: item.id, label: item.date_start})
+        })
+        setSearchAttemptsSelect(array)
+    }, [props.searchAttempts])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getPersons")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.persons.map((item) => {
-                    array.push({value: item.id, label: item.name})
-                })
-                setPersonList(array)
-                setSelectLoadingPers(false)
-            })
-    }, [])
+        let array = []
+        props.typesDocuments.map((item) => {
+            array.push({value: item.id, label: item.type})
+        })
+        setTypeDocSelect(array)
+    }, [props.typesDocuments])
 
     const searchDoc = (id_person) => {
         let request = {
@@ -146,7 +125,7 @@ const Documents = () => {
                 <div>
                     <p className={"title_field"}>* Тип документа</p>
 
-                    <Select options={typeDocList} isLoading={selectLoadingTypeDoc}
+                    <Select options={typeDocSelect} isLoading={props.typesDocumentsLoading}
                             placeholder={"Выберите тип документа"}
                             onChange={(newValue) => {
                                 setIdTypeDoc(newValue.value)
@@ -154,7 +133,7 @@ const Documents = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Попытка поиска</p>
-                    <Select options={searchAttList} isLoading={selectLoadingSearchAtt}
+                    <Select options={searchAttemptsSelect} isLoading={props.searchAttemptsLoading}
                             placeholder={"Выберите попытку поиска"}
                             onChange={(newValue) => {
                                 setIdSearchAtt(newValue.value)
@@ -175,14 +154,14 @@ const Documents = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить автора(ов)</p>
-                    <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
+                    <Select options={personSelect} isLoading={props.personsLoading} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setAuthor(newValue.value)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>
-                    <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
+                    <Select options={personSelect} isLoading={props.personsLoading} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setPerson(newValue.value)
                             }}/>
@@ -233,7 +212,7 @@ const Documents = () => {
                 <span className={"title_form"}>Найти документ</span>
                 <div>
                     <p className={"title_field"}>* ФИО персоны, которая упоминается в документе</p>
-                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персону"}
+                    <Select options={personSelect} isLoading={props.personsLoading} placeholder={"Выберите персону"}
                             onChange={(newValue) => {
                                 searchDoc(newValue.value)
                             }}/>

@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
 
-const Researches = () => {
-    const [research, setResearch] = useState([])
-    const [searchAttList, setSearchAttList] = useState([])
+const Researches = (props) => {
+    const [searchAttemptsSelect, setSearchAttemptsSelect] = useState([])
     const [searchTypeRes, setSearchTypeRes] = useState("")
 
 
-    const [orgList, setOrgList] = useState([])
-    const [typeResList, setTypeResList] = useState([])
+    const [organisationSelect, setOrganisationSelect] = useState([])
+    const [typeResSelect, setTypeResSelect] = useState([])
 
     const [id_organization, setIdOrganization] = useState("test name")
     const [id_search_attempts, setIdSearchAtt] = useState("test name")
@@ -18,112 +17,99 @@ const Researches = () => {
     const [local_place, setLocalPlace] = useState("test desc")
     const [technique, setTechnique] = useState("test desc")
 
-    const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
-    const [selectLoadingOrg, setSelectLoadingOrg] = useState(true)
-    const [selectLoadingTypeRes, setSelectLoadingTypeRes] = useState(true)
-
-        useEffect(() => {
-            fetch("http://127.0.0.1:5000/getOrganisation")
-                .then(res => res.json())
-                .then((result) => {
-                    let array = []
-                    result.organisation.map((item) => {
-                        array.push({value: item.id, label: item.organisation})
-                    })
-                    setOrgList(array)
-                    setSelectLoadingOrg(false)
-                    //console.log(array)
-                })
-        }, [])
-
-        useEffect(() => {
-            fetch("http://127.0.0.1:5000/getTypeResearch")
-                .then(res => res.json())
-                .then((result) => {
-                    let array = []
-                    result.type_research.map((item) => {
-                        array.push({value: item.id, label: item.type})
-                    })
-                    setTypeResList(array)
-                    setSelectLoadingTypeRes(false)
-                })
-        }, [])
-
-        useEffect(() => {
-            fetch("http://127.0.0.1:5000/getSearchAtt")
-                .then(res => res.json())
-                .then((result) => {
-                    let array = []
-                    result.search_attempts.map((item) => {
-                        array.push({value: item.id, label: item.date_start})
-                    })
-                    setSearchAttList(array)
-                    setSelectLoadingSearchAtt(false)
-                })
-        }, [])
+    useEffect(() => {
+        let array = []
+        props.searchAttempts.map((item) => {
+            array.push({value: item.id, label: item.date_start})
+        })
+        setSearchAttemptsSelect(array)
+    }, [props.searchAttempts])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getResearch")
-            .then(res => res.json())
-            .then((result) => {
-                setResearch(result.research)
-            })
-    }, [])
+        let array = []
+        props.typeResearch.map((item) => {
+            array.push({value: item.id, label: item.type})
+        })
+        setTypeResSelect(array)
+
+    }, [props.typeResearch])
+
+    useEffect(() => {
+        let array = []
+        props.organisation.map((item) => {
+            array.push({value: item.id, label: item.organisation})
+        })
+        setOrganisationSelect(array)
+    }, [props.organisation])
 
     const submit = (event) => {
         event.preventDefault()
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({id_organization, id_search_attempts, description, id_type_research, local_place, technique})
+            body: JSON.stringify({
+                id_organization,
+                id_search_attempts,
+                description,
+                id_type_research,
+                local_place,
+                technique
+            })
         }
         fetch("http://127.0.0.1:5000/addResearches", request)
             .then(response => {
-            if (response.status === 200) {
+                if (response.status === 200) {
                     toast.success("Исследование успешно добавлено")
                 } else {
                     toast.error("Ошибка добавления исследования")
                 }
             })
     }
-
-
     return (
         <div className={"forms_wrapper"}>
             <form className="form_wrapper" onSubmit={submit}>
                 <span className={"title_form"}>Добавить исследование</span>
                 <div>
                     <p className={"title_field"}>Организация</p>
-                    <Select options={orgList} isLoading={selectLoadingOrg} placeholder={"Выберите организацию"}
+                    <Select options={organisationSelect} isLoading={props.organisationLoading}
+                            placeholder={"Выберите организацию"}
                             onChange={(newValue) => {
                                 setIdOrganization(newValue.value)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>* Попытка поиска</p>
-                    <Select options={searchAttList} isLoading={selectLoadingSearchAtt} placeholder={"Выберите попытку поиска"}
+                    <Select options={searchAttemptsSelect} isLoading={props.searchAttemptsLoading}
+                            placeholder={"Выберите попытку поиска"}
                             onChange={(newValue) => {
                                 setIdSearchAtt(newValue.value)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Описание </p>
-                    <textarea className="textarea_form" onChange={(event) => {setDescription(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setDescription(event.target.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>* Тип исследования</p>
-                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите тип исследования"}
+                    <Select options={typeResSelect} isLoading={props.typeResearchLoading}
+                            placeholder={"Выберите тип исследования"}
                             onChange={(newValue) => {
                                 setIdTypeResearch(newValue.value)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Локальное место </p>
-                    <textarea className="textarea_form" onChange={(event) => {setLocalPlace(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setLocalPlace(event.target.value)
+                    }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Техника</p>
-                    <textarea className="textarea_form" onChange={(event) => {setTechnique(event.target.value)}}/>
+                    <textarea className="textarea_form" onChange={(event) => {
+                        setTechnique(event.target.value)
+                    }}/>
                 </div>
 
 
@@ -131,82 +117,66 @@ const Researches = () => {
             </form>
             <div className="form_wrapper">
                 <span className={"title_form"}>Найти исследование</span>
-                                <div>
-                                    <p className={"title_field"}>* Тип исследования</p>
-                    <Select options={typeResList} isLoading={selectLoadingTypeRes} placeholder={"Выберите тип исследования"}
+                <div>
+                    <p className={"title_field"}>* Тип исследования</p>
+                    <Select options={typeResSelect} isLoading={props.typeResearchLoading}
+                            placeholder={"Выберите тип исследования"}
                             onChange={(newValue) => {
                                 setSearchTypeRes(newValue.value)
                             }}/>
-                                </div>
+                </div>
                 <p className={"title_field"}>Результаты поиска</p>
                 <div className="scroll-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>id исследования</th>
-                                <th>id организации</th>
-                                <th>id попытки поиска</th>
-                                <th>Описание</th>
-                                <th>Тип исследования</th>
-                                <th>Локальное место</th>
-                                <th>Техника</th>
-                            </tr>
+                        <tr>
+                            <th>id исследования</th>
+                            <th>id организации</th>
+                            <th>id попытки поиска</th>
+                            <th>Описание</th>
+                            <th>Тип исследования</th>
+                            <th>Локальное место</th>
+                            <th>Техника</th>
+                        </tr>
                         </thead>
                     </table>
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {research.map(item => {
+                            {props.research.map(item => {
                                 if (item.id_type_research === searchTypeRes) {
                                     return (
                                         <tr>
                                             <td>{item.id}</td>
-
-
-
-                            {orgList.map(org => {
-
-                                 if (org.value == item.id_organization) {
-                                    return (
-                                            <td>{org.label}</td>
-                                    )
-
-                                }
-
-                            })}
-                            {searchAttList.map(srch => {
-
-                                 if (srch.value == item.id_search_attempts) {
-                                    return (
-                                            <td>{srch.label}</td>
-                                    )
-
-                                }
-
-                            })}
-
-
-
-
+                                            {organisationSelect.map(org => {
+                                                if (org.value == item.id_organization) {
+                                                    return (
+                                                        <td>{org.label}</td>
+                                                    )
+                                                }
+                                            })}
+                                            {searchAttemptsSelect.map(srch => {
+                                                if (srch.value == item.id_search_attempts) {
+                                                    return (
+                                                        <td>{srch.label}</td>
+                                                    )
+                                                }
+                                            })}
                                             <td>{item.description}</td>
-                            {typeResList.map(tprs => {
+                                            {typeResSelect.map(tprs => {
 
-                                 if (tprs.value == item.id_type_research) {
-                                    return (
-                                            <td>{tprs.label}</td>
-                                    )
-
-                                }
-
-                            })}
-
+                                                if (tprs.value == item.id_type_research) {
+                                                    return (
+                                                        <td>{tprs.label}</td>
+                                                    )
+                                                }
+                                            })}
                                             <td>{item.local_place}</td>
                                             <td>{item.tecnique}</td>
                                         </tr>
                                     )
                                 }
                             })}
-
                             </tbody>
                         </table>
                     </div>
