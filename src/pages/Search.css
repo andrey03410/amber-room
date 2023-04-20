@@ -1,0 +1,17 @@
+.image_preview {
+    height: 10%;
+    width: 10%;
+}
+
+.form_wrapper_search {
+    display: block;
+    width: 70%;
+    /* Параметры границы */
+    background: #d3d3d3; /* Цвет фона */
+    border-radius: 10px;
+    padding: 10px; /* Поля вокруг текста */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5)
+}

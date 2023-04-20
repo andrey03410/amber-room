@@ -2,69 +2,42 @@ import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
 
-const Indications = () => {
-    const [indications, setIndications] = useState([])
+const Indications = (props) => {
     const [searchAuthor, setSearchAuthor] = useState("")
 
-    const [personList, setPersonList] = useState([])
-    const [docList, setDocList] = useState(["Отчет о работе...", "Акт...", "Краткая характеристика..."])
-    const [versionList, setVersionList] = useState(["Королевский замок, западное крыльцо", "Королевский замок, подвал", "Королевский замок, южное крыло"])
+    const [personSelect, setPersonSelect] = useState([])
+    const [docSelect, setDocSelect] = useState(["Отчет о работе...", "Акт...", "Краткая характеристика..."])
+    const [versionSelect, setVersionSelect] = useState(["Королевский замок, западное крыльцо", "Королевский замок, подвал", "Королевский замок, южное крыло"])
+
     const [id_persons, setIdPersons] = useState("test name")
     const [testimony, setTestimony] = useState("test desc")
     const [id_versions, setIdVersions] = useState("test desc")
     const [date, setDate] = useState("test date")
     const [documentSelectValue, setDocumentSelectValue] = useState({id_doc: ""})
 
-    const [selectLoadingPers, setSelectLoadingPers] = useState(true)
-    const [selectLoading, setSelectLoading] = useState(true)
-    const [selectLoadingDocs, setSelectLoadingDocs] = useState(true)
+    useEffect(() => {
+        let array = []
+        props.persons.map((item) => {
+            array.push({value: item.id, label: item.name})
+        })
+        setPersonSelect(array)
+    }, [props.persons])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getVersions")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.versions.map((item) => {
-                    array.push({value: item.id, label: item.description})
-                })
-                setVersionList(array)
-                setSelectLoading(false)
-            })
-    }, [])
+        let array = []
+        props.versions.map((item) => {
+            array.push({value: item.id, label: item.description})
+        })
+        setVersionSelect(array)
+    }, [props.versions])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getDocument")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.document.map((item) => {
-                    array.push({value: item.id, label: item.description})
-                })
-                setDocList(array)
-                setSelectLoadingDocs(false)
-            })
-    }, [])
-
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getIndication")
-            .then(res => res.json())
-            .then((result) => {
-                setIndications(result.indications)
-            })
-    }, [])
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getPersons")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.persons.map((item) => {
-                    array.push({value: item.id, label: item.name})
-                })
-                setPersonList(array)
-                setSelectLoadingPers(false)
-            })
-    }, [])
+        let array = []
+        props.documents.map((item) => {
+            array.push({value: item.id, label: item.description})
+        })
+        setDocSelect(array)
+    }, [props.documents])
 
 
     const submit = (event) => {
@@ -93,7 +66,7 @@ const Indications = () => {
                 <span className={"title_form"}>Добавить показание</span>
                 <div>
                     <p className={"title_field"}>* Автор показания</p>
-                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персон"}
+                    <Select options={personSelect} isLoading={props.personsLoading} placeholder={"Выберите персон"}
                             onChange={(newValue) => {
                                 setIdPersons(newValue.value)
                             }}/>
@@ -106,12 +79,11 @@ const Indications = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>* Версия</p>
-                    <Select options={versionList} isLoading={selectLoading} placeholder={"Выберите версию"}
+                    <Select options={versionSelect} isLoading={props.versionsLoading} placeholder={"Выберите версию"}
                             onChange={(newValue) => {
                                 setIdVersions(newValue.value)
                             }}/>
                 </div>
-
                 <div>
                     <p className={"title_field"}>Дата </p>
                     <input className="form_input" onChange={(event) => {
@@ -119,11 +91,10 @@ const Indications = () => {
                     }}/>
                 </div>
                 <p className={"title_field"}>Документы, с которыми связаны показания</p>
-                <Select options={docList} isLoading={selectLoading} isMulti placeholder={"Выберите документ(ы)"}
+                <Select options={docSelect} isLoading={props.documentsLoading} isMulti placeholder={"Выберите документ(ы)"}
                         onChange={(newValue) => {
                             setDocumentSelectValue(newValue)
                         }}/>
-
 
                 <button className={"submit_button"}>Отправить</button>
             </form>
@@ -131,7 +102,7 @@ const Indications = () => {
                 <span className={"title_form"}>Найти показание</span>
                 <div>
                     <p className={"title_field"}>* ФИО автора</p>
-                    <Select options={personList} isLoading={selectLoading} placeholder={"Выберите ФИО автора"}
+                    <Select options={personSelect} isLoading={props.personsLoading} placeholder={"Выберите ФИО автора"}
                             onChange={(newValue) => {
                                 setSearchAuthor(newValue.value)
                             }}/>
@@ -152,32 +123,27 @@ const Indications = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-                            {indications.map(item => {
+                            {props.indications.map(item => {
                                 if (item.id_persons === searchAuthor) {
                                     return (
                                         <tr>
                                             <td>{item.id}</td>
-                                            {personList.map(prsn => {
+                                            {personSelect.map(prsn => {
                                                 if (prsn.value === item.id_persons) {
                                                     return (
-
                                                         <td>{prsn.label}</td>
-
                                                     )
                                                 }
                                             })}
 
                                             <td>{item.testimony}</td>
-                                            {versionList.map(vrsn => {
+                                            {versionSelect.map(vrsn => {
                                                 if (vrsn.value === item.id_versions) {
                                                     return (
-
                                                         <td>{vrsn.label}</td>
-
                                                     )
                                                 }
                                             })}
-
                                             <td>{item.date}</td>
                                         </tr>
                                     )

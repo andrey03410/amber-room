@@ -2,38 +2,20 @@ import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
 
-const Versions = () => {
-    const [versions, setVersion] = useState([])
-    const [placeList, setPlaceList] = useState([])
-    const [selectLoading, setSelectLoading] = useState(true)
-
+const Versions = (props) => {
+    const [placesSelect, setPlacesSelect] = useState([])
 
     const [id_places, setIdPlaces] = useState("1")
     const [description, setDescription] = useState("test desc")
     const [searchPlaceName, setSearchPlaceName] = useState("")
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/getVersions")
-            .then(res => res.json())
-            .then((result) => {
-                setVersion(result.versions)
-            })
-    }, [])
-
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getPlaces")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-                result.places.map((item) => {
-                    array.push({value: item.id, label: item.name})
-                })
-                setPlaceList(array)
-                setSelectLoading(false)
-            })
-    }, [])
-
+        let array = []
+        props.places.map((item) => {
+            array.push({value: item.id, label: item.name})
+        })
+        setPlacesSelect(array)
+    }, [props.places])
 
     const submit = (event) => {
         event.preventDefault()
@@ -51,8 +33,6 @@ const Versions = () => {
                 }
             })
     }
-
-
     return (
         <div className={"forms_wrapper"}>
             <form className="form_wrapper" onSubmit={submit}>
@@ -60,7 +40,7 @@ const Versions = () => {
                 <div>
                     <p className={"title_field"}>* Место</p>
 
-                    <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
+                    <Select options={placesSelect} isLoading={props.placesLoading} placeholder={"Выберите место"}
                             onChange={(newValue) => {
                                 setIdPlaces(newValue.value)
                             }}/>
@@ -78,7 +58,7 @@ const Versions = () => {
                 <div>
                     <p className={"title_field"}>* Место</p>
 
-                    <Select options={placeList} isLoading={selectLoading} placeholder={"Выберите место"}
+                    <Select options={placesSelect} isLoading={props.placesLoading} placeholder={"Выберите место"}
                             onChange={(newValue) => {
                                 setSearchPlaceName(newValue.value)
                             }}/>
@@ -97,27 +77,23 @@ const Versions = () => {
                     <div className="scroll-table-body">
                         <table>
                             <tbody>
-
-                            {versions.map(item => {
+                            {props.versions.map(item => {
                                 if (item.id_places === searchPlaceName) {
                                     return (
                                         <tr>
                                             <td>{item.id}</td>
-                                            {placeList.map(plc => {
+                                            {placesSelect.map(plc => {
                                                 if (plc.value === item.id_places) {
                                                     return (
                                                         <td>{plc.label}</td>
-
                                                     )
                                                 }
                                             })}
-
                                             <td>{item.description}</td>
                                         </tr>
                                     )
                                 }
                             })}
-
                             </tbody>
                         </table>
                     </div>

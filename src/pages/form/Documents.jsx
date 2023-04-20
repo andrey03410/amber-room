@@ -10,10 +10,6 @@ const Documents = () => {
 
     const [person, setPerson] = useState("Иванов")
     const [author, setAuthor] = useState("Петров")
-
-    const [postPersonList, setPostPersonList] = useState([])
-    const [postAuthorList, setPostAuthorList] = useState([])
-
     const [searchName, setSearchName] = useState("")
 
     const [id_type_doc, setIdTypeDoc] = useState("test name")
@@ -27,6 +23,7 @@ const Documents = () => {
     const [selectLoadingTypeDoc, setSelectLoadingTypeDoc] = useState(true)
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
     const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
+
 
     useEffect(() => {
         fetch("http://127.0.0.1:5000/getTypeDoc")
@@ -125,12 +122,6 @@ const Documents = () => {
         })
     }
 
-        const updatePostPersonList = (event) => {
-
-
-
-        }
-
     const delButtonImage = (event) => {
         event.preventDefault()
         setImageDesc(prevState => {
@@ -191,24 +182,9 @@ const Documents = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>
-                    <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персон"}
+                    <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
-                            setPostPersonList(postPersonList=> {
-                                let array = []
-                                postPersonList.map((item) => {
-                                    array.push({value: item.value})
-                                })
-
-                                array.push({value: newValue.value})
-                                return array
-
-
-
-
-                                                              })
-                            console.log(postPersonList)
-
-
+                                setPerson(newValue.value)
                             }}/>
                 </div>
                 <div>

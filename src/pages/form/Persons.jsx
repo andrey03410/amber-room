@@ -3,42 +3,11 @@ import toast from "react-hot-toast";
 import Select from "react-select";
 
 
-const Persons = () => {
-    const [persons, setPersons] = useState([])
-    const [nationalityList, setNationalityList] = useState([])
-
+const Persons = (props) => {
     const [name, setName] = useState("test name")
     const [id_nationality, setNationality] = useState("1")
     const [description, setDescription] = useState("test desc")
     const [searchName, setSearchName] = useState("")
-
-    const [selectLoading, setSelectLoading] = useState(true)
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getPersons")
-            .then(res => res.json())
-            .then((result) => {
-                setPersons(result.persons)
-            })
-    }, [])
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5000/getNationality")
-            .then(res => res.json())
-            .then((result) => {
-                let array = []
-
-                result.nationality.map((item) => {
-                    array.push({value: item.id, label: item.nationality})
-                })
-                setNationalityList(array)
-                setSelectLoading(false)
-
-                //console.log(nationalityList)
-
-
-            })
-    }, [])
 
     const submit = (event) => {
         event.preventDefault()
@@ -68,7 +37,8 @@ const Persons = () => {
                 </div>
                 <div>
                     <p className={"title_field"}>* Гражданство</p>
-                    <Select options={nationalityList} isLoading={selectLoading} placeholder={"Выберите гражданство"}
+                    <Select options={props.nationalityList} isLoading={props.nationalityListLoading}
+                            placeholder={"Выберите гражданство"}
                             onChange={(newValue) => {
                                 setNationality(newValue.value)
                             }}/>
@@ -113,32 +83,25 @@ const Persons = () => {
                             <col width="25%" valign="top"/>
                             <col width="42%" valign="top"/>
                             <tbody>
-                            {persons.map(item => {
+                            {props.persons.map(item => {
                                 if (item.name.toLowerCase().includes(searchName.toLowerCase())) {
                                     return (
-
                                         <tr>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
-                                            {nationalityList.map(nat => {
-                                        if (nat.value === item.id_nationality) {
-
-                                            return (
-
-                                                    <td>{nat.label}</td>
-
-                                            )
-                                        }
-                                    })}
-
+                                            {props.nationalityList.map(nat => {
+                                                if (nat.value === item.id_nationality) {
+                                                    return (
+                                                        <td>{nat.label}</td>
+                                                    )
+                                                }
+                                            })}
                                             <td>{item.description}</td>
                                         </tr>
                                     )
                                 }
                             })}
-
                             </tbody>
-
                         </table>
                     </div>
                 </div>
