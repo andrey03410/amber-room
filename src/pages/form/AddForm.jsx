@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './AddForm.css'
 import './Places'
+
 import Places from "./Places";
 import Persons from "./Persons";
 import Versions from "./Versions";
@@ -9,6 +10,7 @@ import Documents from "./Documents";
 import Indications from "./Indications";
 import Researches from "./Researches";
 import Finds from "./Finds";
+
 
 
 const AddForm = () => {

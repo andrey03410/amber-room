@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
 
-const Documents = () => {
+const Documents = (props) => {
     const [documents, setDocuments] = useState([])
     const [searchAttList, setSearchAttList] = useState([])
     const [typeDocList, setTypeDocList] = useState([])
@@ -45,7 +45,7 @@ const Documents = () => {
             .then((result) => {
                 let array = []
                 result.search_attempts.map((item) => {
-                    array.push({value: item.id, label: item.date_start})
+                    array.push({value: item.id, label: item.description})
                 })
                 setSearchAttList(array)
                 setSelectLoadingSearchAtt(false)
@@ -258,8 +258,23 @@ const Documents = () => {
                                 return (
                                     <tr>
                                         <td>{item.id}</td>
-                                        <td>{item.id_type_doc}</td>
-                                        <td>{item.id_search_attempts}</td>
+                                        {typeDocList.map(nat => {
+                                                if (nat.value === item.id_type_doc) {
+                                                    return (
+                                                        <td>{nat.label}</td>
+                                                    )
+                                                }
+                                            })}
+                                        {searchAttList.map(nat => {
+                                                if (nat.value == item.id_search_attempts) {
+                                                    return (
+                                                        <td>{nat.label}</td>
+                                                    )
+                                                }
+                                            })}
+
+
+
                                         <td>{item.date}</td>
                                         <td>{item.description}</td>
                                     </tr>
