@@ -1,7 +1,7 @@
 import './App.css';
 import {Routes, Route, Link} from "react-router-dom";
 import Search from './pages/Search'
-import Map from './pages/Map'
+import MapView from './pages/MapView'
 import AddForm from './pages/form/AddForm'
 import React from "react";
 import {Toaster} from "react-hot-toast";
@@ -20,7 +20,7 @@ function App() {
         <Routes>
             <Route path="/AddForm" element={<AddForm/>}/>
             <Route path="/Search" element={<Search/>}/>
-            <Route path="/Map" element={<Map/>}/>
+            <Route path="/Map" element={<MapView/>}/>
             <Route path="/" element={<div>About</div>}/>
         </Routes>
     </div>
