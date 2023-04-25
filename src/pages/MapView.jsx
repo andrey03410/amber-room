@@ -1,17 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { MapContainer, CircleMarker, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-
+import { YMaps, Map } from 'react-yandex-maps';
 
 const MapView = () => {
     return (
-        <div>
-            <MapContainer
-              style={{ height: "480px", width: "100%" }}
-              zoom={1}
-              center={[-0.09, 51.505]}>
-            </MapContainer>
-          </div>
+        <YMaps>
+            <div>
+                <Map width={1280} height={720} defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
+            </div>
+        </YMaps>
     );
 };
 
