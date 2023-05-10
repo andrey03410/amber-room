@@ -69,11 +69,13 @@ const Documents = (props) => {
             })
     }, [])
 
+
+
     const searchDoc = (id_person) => {
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            // body: JSON.stringify({id_type_doc, id_search_attempts,date, description, author, person, imageDesc, images})
+            // body: JSON.stringify({id_type_doc, id_search_attempts,date, description, id_author, id_person, imageDesc, images})
             body: JSON.stringify({id_person})
         }
         fetch("http://127.0.0.1:5000/findDoc", request)
@@ -92,13 +94,13 @@ const Documents = (props) => {
 
     const submit = (event) => {
         event.preventDefault()
-        let id_persons = []
+        let id_person = []
                 personsSelectValue.map((item) => {
-                    id_persons.push(item.value)
+                    id_person.push(item.value)
                 })
-        let id_authors = []
+        let id_author = []
                         authorsSelectValue.map((item) => {
-                            id_authors.push(item.value)
+                            id_author.push(item.value)
                         })
 
         let formData = new FormData()
@@ -113,10 +115,10 @@ const Documents = (props) => {
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-             body: JSON.stringify({id_type_doc, id_search_attempts,date, description, id_authors, id_persons, imageDesc, images})
+             body: JSON.stringify({id_type_doc, id_search_attempts,date, description, id_author, id_person, imageDesc, images})
 
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addDocument", request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Документ успешно добавлен")
