@@ -73,6 +73,7 @@ const Documents = (props) => {
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            // body: JSON.stringify({id_type_doc, id_search_attempts,date, description, author, person, imageDesc, images})
             body: JSON.stringify({id_person})
         }
         fetch("http://127.0.0.1:5000/findDoc", request)
