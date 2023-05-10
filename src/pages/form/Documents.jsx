@@ -24,6 +24,9 @@ const Documents = (props) => {
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
     const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
 
+     const [personsSelectValue, setPersonsSelectValue] = useState({id_persons: ""})
+     const [authorsSelectValue, setAuthorsSelectValue] = useState({id_authors: ""})
+
 
     useEffect(() => {
         fetch("http://127.0.0.1:5000/getTypeDoc")
@@ -88,6 +91,15 @@ const Documents = (props) => {
 
     const submit = (event) => {
         event.preventDefault()
+        let id_persons = []
+                personsSelectValue.map((item) => {
+                    id_persons.push(item.value)
+                })
+        let id_authors = []
+                        authorsSelectValue.map((item) => {
+                            id_authors.push(item.value)
+                        })
+
         let formData = new FormData()
         formData.append("images", images)
         formData.append("imageDesc", imageDesc)
@@ -100,8 +112,8 @@ const Documents = (props) => {
         let request = {
             method: 'POST',
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            // body: JSON.stringify({id_type_doc, id_search_attempts,date, description, author, person, imageDesc, images})
-            body: formData,
+             body: JSON.stringify({id_type_doc, id_search_attempts,date, description, id_authors, id_persons, imageDesc, images})
+
         }
         fetch("test.com", request)
             .then(response => {
@@ -177,14 +189,15 @@ const Documents = (props) => {
                     <p className={"title_field"}>Добавить автора(ов)</p>
                     <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
-                                setAuthor(newValue.value)
+                                setAuthorsSelectValue(newValue)
                             }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Добавить персон, которые упоминались в документе</p>
                     <Select options={personList} isLoading={selectLoadingPers} isMulti placeholder={"Выберите персон"}
                             onChange={(newValue) => {
-                                setPerson(newValue.value)
+                            setPersonsSelectValue(newValue)
+
                             }}/>
                 </div>
                 <div>

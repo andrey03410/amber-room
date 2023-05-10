@@ -51,7 +51,7 @@ const Indications = (props) => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({id_persons, testimony, id_versions, date, id_documents})
         }
-        fetch("test.com", request)
+        fetch("http://127.0.0.1:5000/addIndications", request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Показание успешно добавлено")

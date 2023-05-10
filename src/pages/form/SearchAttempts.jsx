@@ -9,10 +9,10 @@ const SearchAttempts = (props) => {
     const [searchVersion, setSearchVersion] = useState("")
 
     const [id_versions, setIdVersion] = useState("test name")
-    const [date_start, setDateStart] = useState("date1")
+    const [date_start, setDateStart] = useState("-")
     const [description, setDescription] = useState("test desc")
 
-    const [date_finish, setDateFinish] = useState("date2")
+    const [date_finish, setDateFinish] = useState("-")
     const [selectLoading, setSelectLoading] = useState(true)
 
     useEffect(() => {
@@ -53,13 +53,13 @@ const SearchAttempts = (props) => {
                 </div>
                 <div>
                     <p className={"title_field"}>Дата начала</p>
-                    <input type="date" className="form_input" onChange={(event) => {
+                    <input type="form_input" className="form_input" onChange={(event) => {
                         setDateStart(event.target.value)
                     }}/>
                 </div>
                 <div>
                     <p className={"title_field"}>Дата окончания</p>
-                    <input type="date" className="form_input" onChange={(event) => {
+                    <input type="form_input" className="form_input" onChange={(event) => {
                         setDateFinish(event.target.value)
                     }}/>
                 </div>
