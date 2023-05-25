@@ -97,7 +97,7 @@ const Search = (props) => {
     return (
         <div>
             <div className="form_wrapper_search">
-                <span className={"title_form"}>Найти документ</span>
+                <span className={"title_form"}>Найти документы</span>
                 <div>
                     <p className={"title_field"}>* ФИО персоны, которая упоминается в документе</p>
                     <Select options={personList} isLoading={selectLoadingPers} placeholder={"Выберите персону"}
@@ -110,9 +110,9 @@ const Search = (props) => {
                     <table>
                         <thead>
                         <tr>
-                            <th>id места</th>
-                            <th>id тип документа</th>
-                            <th>id попытки поиска</th>
+                            <th>Места</th>
+                            <th>Тип документа</th>
+                            <th>Попытка поиска</th>
                             <th>Дата</th>
                             <th>Описание</th>
                             <th>Загрузить</th>
