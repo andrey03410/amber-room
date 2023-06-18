@@ -18,7 +18,7 @@ const Documents = (props) => {
     const [description, setDescription] = useState("test desc")
 
     const [imageDesc, setImageDesc] = useState(["test"])
-    const [images, setImages] = useState([null])
+    const [images, setImages] = useState([]);
 
     const [selectLoadingTypeDoc, setSelectLoadingTypeDoc] = useState(true)
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
@@ -104,8 +104,10 @@ const Documents = (props) => {
                         })
 
         let formData = new FormData()
-        formData.append("images", images)
         formData.append("imageDesc", imageDesc)
+        images.forEach((file, i) => {
+            formData.append(`file-${i}`, file);
+        });
         formData.append("id_type_doc", id_type_doc)
         formData.append("id_search_attempts", id_search_attempts)
         formData.append("date", date)
@@ -114,9 +116,8 @@ const Documents = (props) => {
         formData.append("person", person)
         let request = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-             body: JSON.stringify({id_type_doc, id_search_attempts,date, description, id_author, id_person, imageDesc, images})
-
+            headers: {'Access-Control-Allow-Origin': '*'},
+            body: formData
         }
         fetch("http://127.0.0.1:5000/addDocument", request)
             .then(response => {

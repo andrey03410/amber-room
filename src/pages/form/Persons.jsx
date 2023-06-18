@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import toast from "react-hot-toast";
 import Select from "react-select";
+import {ENDPOINTS} from "../../API/endpoints";
 
 
 const Persons = (props) => {
@@ -16,7 +17,7 @@ const Persons = (props) => {
             headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
             body: JSON.stringify({name, id_nationality, description})
         }
-        fetch("http://127.0.0.1:5000/addPerson", request)
+        fetch(ENDPOINTS.PERSON.POST, request)
             .then(response => {
                 if (response.status === 200) {
                     toast.success("Перcона успешно добавлена")
