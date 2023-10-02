@@ -102,22 +102,10 @@ const Documents = (props) => {
                         authorsSelectValue.map((item) => {
                             id_author.push(item.value)
                         })
-
-        let formData = new FormData()
-        formData.append("imageDesc", imageDesc)
-        images.forEach((file, i) => {
-            formData.append(`file-${i}`, file);
-        });
-        formData.append("id_type_doc", id_type_doc)
-        formData.append("id_search_attempts", id_search_attempts)
-        formData.append("date", date)
-        formData.append("description", description)
-        formData.append("author", author)
-        formData.append("person", person)
         let request = {
             method: 'POST',
-            headers: {'Access-Control-Allow-Origin': '*'},
-            body: formData
+            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            body: JSON.stringify({id_type_doc, id_search_attempts, date, description, id_author, id_person, imageDesc, images})
         }
         fetch("http://127.0.0.1:5000/addDocument", request)
             .then(response => {
