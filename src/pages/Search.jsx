@@ -4,6 +4,14 @@ import {PhotoProvider, PhotoView} from 'react-photo-view';
 import './Search.css'
 import Select from "react-select";
 import toast from "react-hot-toast";
+import { Viewer } from '@react-pdf-viewer/core';
+import { Worker } from '@react-pdf-viewer/core';
+
+// Import the styles
+import '@react-pdf-viewer/core/lib/styles/index.css';
+
+
+
 import {ENDPOINTS} from "../API/endpoints";
 
 const Search = (props) => {
@@ -95,6 +103,7 @@ const Search = (props) => {
                 setSelectLoadingPers(false)
             })
     }, [])
+
     return (
         <div>
             <div className="form_wrapper_search">
@@ -159,17 +168,21 @@ const Search = (props) => {
                 </div>
             </div>
             <h3>Просмотреть документы</h3>
-            <PhotoProvider>
-                <div>
-                    {images.map((item) => (
-                        <PhotoView key={item.id_image}
-                                   src={ENDPOINTS.IMAGE.GET + item.id_image.toString()}>
-                            <img src={ENDPOINTS.IMAGE.GET + item.id_image.toString()} alt={''}
-                                 className='image_preview'/>
-                        </PhotoView>
-                    ))}
-                </div>
-            </PhotoProvider>
+            {/*<PhotoProvider>*/}
+            {/*    <div>*/}
+            {/*        {images.map((item) => (*/}
+            {/*            <PhotoView key={item.id_image}*/}
+            {/*                       src={ENDPOINTS.IMAGE.GET + item.id_image.toString()}>*/}
+            {/*                <img src={ENDPOINTS.IMAGE.GET + item.id_image.toString()} alt={''}*/}
+            {/*                     className='image_preview'/>*/}
+            {/*            </PhotoView>*/}
+            {/*        ))}*/}
+            {/*    </div>*/}
+            {/*</PhotoProvider>*/}
+
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                <Viewer fileUrl={ENDPOINTS.IMAGE.GET + 1}/>;
+            </Worker>
         </div>
     );
 };

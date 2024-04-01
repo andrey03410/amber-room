@@ -5,11 +5,13 @@ import MapView from './pages/MapView'
 import AddForm from './pages/form/AddForm'
 import React from "react";
 import {Toaster} from "react-hot-toast";
+import { Worker } from '@react-pdf-viewer/core';
 
 function App() {
   return (
     <div>
         <Toaster/>
+
         <nav className="Navigation">
             <ul className="top-nav">
                 <li className="nav-list"><Link className="nav-ref" to="/Map"><i/>Карта</Link></li>
