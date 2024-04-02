@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import 'react-photo-view/dist/react-photo-view.css';
-import {PhotoProvider, PhotoView} from 'react-photo-view';
 import './Search.css'
 import Select from "react-select";
 import toast from "react-hot-toast";
@@ -15,7 +14,6 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import {ENDPOINTS} from "../API/endpoints";
 
 const Search = (props) => {
-    const [images, setImages] = useState([{id_image: 1, description: "test"}])
     const [documents, setDocuments] = useState([])
     const [personList, setPersonList] = useState([])
     const [selectLoadingPers, setSelectLoadingPers] = useState(true)
@@ -23,6 +21,7 @@ const Search = (props) => {
     const [typeDocList, setTypeDocList] = useState([])
     const [selectLoadingTypeDoc, setSelectLoadingTypeDoc] = useState(true)
     const [selectLoadingSearchAtt, setSelectLoadingSearchAtt] = useState(true)
+    const [documentID, setDocumentID] = useState(1)
 
     useEffect(() => {
         fetch("http://127.0.0.1:5000/getTypeDoc")
@@ -68,26 +67,6 @@ const Search = (props) => {
             })
             .then(result => {
                 setDocuments(result.documents)
-            })
-    }
-
-    const loadImagesId = (id_document) => {
-        let request = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            body: JSON.stringify({id_document})
-        }
-        fetch("http://127.0.0.1:5000/findImages", request)
-            .then(response => {
-                if (response.status === 200) {
-                    toast.success("Фотографии найдены")
-                } else {
-                    toast.error("Фотографии не найдены")
-                }
-                return response.json()
-            })
-            .then(result => {
-                setImages(result.images)
             })
     }
 
@@ -154,8 +133,7 @@ const Search = (props) => {
                                         <td>{item.description}</td>
                                         <td>
                                             <button value={item.id} onClick={(event) => {
-                                                loadImagesId(item.id)
-                                                console.log(images)
+                                                setDocumentID(item.id)
                                             }}>Загрузить
                                             </button>
                                         </td>
@@ -181,7 +159,7 @@ const Search = (props) => {
             {/*</PhotoProvider>*/}
 
             <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                <Viewer fileUrl={ENDPOINTS.IMAGE.GET + 1}/>;
+                <Viewer fileUrl={ENDPOINTS.IMAGE.GET + documentID.toString()}/>;
             </Worker>
         </div>
     );
