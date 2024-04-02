@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import 'react-photo-view/dist/react-photo-view.css';
 import './Search.css'
 import Select from "react-select";
 import toast from "react-hot-toast";
